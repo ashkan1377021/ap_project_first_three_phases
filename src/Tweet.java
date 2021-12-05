@@ -17,13 +17,12 @@ public class Tweet {
     /**
      * creates a new tweet
      * @param sender sender of the tweet
-     * @param likes number of likes of the tweet
      * @param text text of the tweet
      * @param sendDate send date of the tweet
      */
-    public Tweet(User sender, int likes, String text, LocalDate sendDate) {
+    public Tweet(User sender, String text, LocalDate sendDate) {
         this.sender = sender;
-        this.likes = likes;
+        this.likes = 0;
         this.text = text;
         this.sendDate = sendDate;
     }
@@ -84,5 +83,15 @@ public class Tweet {
      */
     public void setSendDate(LocalDate sendDate) {
         this.sendDate = sendDate;
+    }
+
+    @Override
+    public String toString() {
+        return "Tweet{" +
+                "sender=" + sender +
+                ", likes=" + likes +
+                ", text='" + text + '\'' +
+                ", sendDate=" + sendDate +
+                '}';
     }
 }
