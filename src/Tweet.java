@@ -1,5 +1,4 @@
 import java.time.*;
-
 /**
  * this class holds details of a tweet
  * @author ashkan_mogharab

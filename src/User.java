@@ -1,9 +1,9 @@
-import java.time.LocalDate;
-import java.time.LocalDate.*;
+import java.time.*;
 import java.math.BigInteger;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
 // Java program to calculate SHA hash value
 /**
  * this class holds details of an user in ServerSide
@@ -24,7 +24,14 @@ public class User {
     private LocalDate registeryDate;
     //bio of the user that its  maximum length is 256
     private String bio ;
-
+    //tweets of the user
+    private ArrayList<Tweet> tweets;
+    //retweets of the user
+    private ArrayList<Tweet> retweets;
+    //retweets of the user
+    private ArrayList<User> followers;
+    //favorite users of the user
+    private ArrayList<User> favoriteUsers;
     /**
      * creates a new user
      * @param firstname firstname of the user
@@ -44,6 +51,10 @@ public class User {
             this.birthDate = birthDate;
             this.registeryDate = registeryDate;
             this.bio = bio;
+            tweets = new ArrayList<>();
+            retweets = new ArrayList<>();
+            followers = new ArrayList<>();
+            favoriteUsers = new ArrayList<>();
         }
         // For specifying wrong message digest algorithms
         catch (NoSuchAlgorithmException e) {
