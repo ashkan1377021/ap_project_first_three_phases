@@ -26,7 +26,7 @@ public class User {
     private String bio ;
 
     /**
-     *
+     * creates a new user
      * @param firstname firstname of the user
      * @param lastname  lastname of the user
      * @param username username of the user
