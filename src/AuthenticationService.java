@@ -53,12 +53,12 @@ public class AuthenticationService {
             System.out.println("sign up form :");
             Scanner input = new Scanner(System.in);
             System.out.println("first name :");
-            firstname = input.next();
+            firstname = input.nextLine();
             System.out.println("last name :");
-            lastname = input.next();
+            lastname = input.nextLine();
             while (true) {
-                System.out.println("user name :");
-                username = input.next();
+                System.out.println("username :");
+                username = input.nextLine();
                 if (username_is_valid(username))
                     break;
                 System.out.println("This username is duplicate" + "\n" + "1:continue attempting" + "\n" + "2: back");
@@ -67,7 +67,7 @@ public class AuthenticationService {
                     act();
             }
             System.out.println("password :");
-            password = input.next();
+            password = input.nextLine();
             System.out.println("birthdate :");
             int year =0;
             int month = 0;
@@ -103,7 +103,8 @@ public class AuthenticationService {
             birthDate = LocalDate.of(year,month,day);
             while (true) {
                 System.out.println("Bio:");
-                bio = input.next();
+                 input.nextLine() ;
+                bio = input.nextLine();
                 if (bio.length() <= 256)
                     break;
                 System.out.println("This String is very long .maximum valid length is 256");
@@ -129,7 +130,7 @@ public class AuthenticationService {
         Scanner input = new Scanner(System.in);
         while (flag == 0) {
             System.out.println("username: ");
-            username = input.next();
+            username = input.nextLine();
             int i;
             for (i = 0; i < users.size(); i++)
                 if (users.get(i).getUsername().equals(username)) {
@@ -141,7 +142,7 @@ public class AuthenticationService {
                 try {
                     while (flg == 0) {
                         System.out.println("password :");
-                        password = usefulmethods.toHexString(usefulmethods.getSHA(input.next()));
+                        password = usefulmethods.toHexString(usefulmethods.getSHA(input.nextLine()));
                         if (password.equals(users.get(i).getPassword())) {
                             System.out.println("Hi " + users.get(i).getFirstname() + ". welcome to your account");
                             flg = 1;
