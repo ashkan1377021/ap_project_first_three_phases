@@ -1,5 +1,6 @@
 import java.util.*;
 import java.time.*;
+import java.security.NoSuchAlgorithmException;
 /**
  * this class can sign up persons in tweeter and also can allow to previous users to sign in tweeter
  * @author  ashkan_mogharab
@@ -128,4 +129,5 @@ public class AuthenticationService {
         else
             act();
     }
+
 }

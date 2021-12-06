@@ -1,15 +1,14 @@
 import java.time.*;
-import java.math.BigInteger;
-import java.nio.charset.StandardCharsets;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
+import java.security.NoSuchAlgorithmException;
 // Java program to calculate SHA hash value
 /**
  * this class holds details of an user in ServerSide
  * @author ashkan_mogharab
  */
 public class User {
+    //an object of toHexString class for converting password to hex string
+    private toHexString tohexString = new toHexString();
     //firstname of the user
     private String firstname;
     //lastname of the user
@@ -43,53 +42,24 @@ public class User {
      * @param bio bio of the user
      */
     public User(String firstname, String lastname, String username, String password, LocalDate birthDate, LocalDate registeryDate, String bio) {
-        try {
-            this.firstname = firstname;
-            this.lastname = lastname;
-            this.username = username;
-            this.password = toHexString(getSHA(password));
-            this.birthDate = birthDate;
-            this.registeryDate = registeryDate;
-            this.bio = bio;
-            tweets = new ArrayList<>();
-            retweets = new ArrayList<>();
-            followers = new ArrayList<>();
-            favoriteUsers = new ArrayList<>();
-        }
-        // For specifying wrong message digest algorithms
-        catch (NoSuchAlgorithmException e) {
-            System.out.println("Exception thrown for incorrect algorithm: " + e);
-        }
+            try {
+                this.firstname = firstname;
+                this.lastname = lastname;
+                this.username = username;
+                this.password =tohexString.Run(tohexString.getSHA(password));
+                this.birthDate = birthDate;
+                this.registeryDate = registeryDate;
+                this.bio = bio;
+                tweets = new ArrayList<>();
+                retweets = new ArrayList<>();
+                followers = new ArrayList<>();
+                favoriteUsers = new ArrayList<>();
+            }
+            // For specifying wrong message digest algorithms
+            catch (NoSuchAlgorithmException e) {
+                System.out.println("Exception thrown for incorrect algorithm: " + e);
+            }
     }
-
-    private static byte[] getSHA(String input) throws NoSuchAlgorithmException
-    {
-        // Static getInstance method is called with hashing SHA
-        MessageDigest md = MessageDigest.getInstance("SHA-256");
-
-        // digest() method called
-        // to calculate message digest of an input
-        // and return array of byte
-        return md.digest(input.getBytes(StandardCharsets.UTF_8));
-    }
-
-    private static String toHexString(byte[] hash)
-    {
-        // Convert byte array into signum representation
-        BigInteger number = new BigInteger(1, hash);
-
-        // Convert message digest into hex value
-        StringBuilder hexString = new StringBuilder(number.toString(16));
-
-        // Pad with leading zeros
-        while (hexString.length() < 32)
-        {
-            hexString.insert(0, '0');
-        }
-
-        return hexString.toString();
-    }
-
     /**
      * getter
      * @return firstname of the user
