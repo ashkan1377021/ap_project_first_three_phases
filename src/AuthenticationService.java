@@ -6,6 +6,10 @@ import java.security.NoSuchAlgorithmException;
  * @author  ashkan_mogharab
  */
 public class AuthenticationService {
+    //an object of usefulMethods
+    private usefulMethods usefulmethods = new usefulMethods();
+    //index of user who signs in or signs up
+    private int j ;
     // select of the person
      private int select;
     //users of ServerSide
@@ -21,8 +25,8 @@ public class AuthenticationService {
     /**
      * this method handles the works that should be done in authentication service
      */
-    private  void act(){
-            System.out.println("Welcome to Tweeter" + "\n" + "1:sign up" + '\n' + "2:Sign in" + '\n' + "3:Quit");
+    private void act(){
+            System.out.println("Welcome to Tweeter" + "\n" + "1:sign up" + '\n' + "2:Sign in" + '\n' + "3:back");
         while(true) {
             Scanner input = new Scanner(System.in);
             select = input.nextInt();
@@ -33,8 +37,7 @@ public class AuthenticationService {
             signUp();
         else if(select == 2)
             signIn();
-        else
-            System.exit(0);
+        else;
     }
 
     /**
@@ -58,8 +61,10 @@ public class AuthenticationService {
                 username = input.next();
                 if (username_is_valid(username))
                     break;
-                System.out.println("This username is duplicate" + "\n" + "1:continue attempting" + "\n" + "2: back to main menu");
-                continue_or_not();
+                System.out.println("This username is duplicate" + "\n" + "1:continue attempting" + "\n" + "2: back");
+                int se = usefulmethods.continue_or_not();
+                if(se == 2)
+                    act();
             }
             System.out.println("password :");
             password = input.next();
@@ -74,8 +79,10 @@ public class AuthenticationService {
                 System.out.println("month:");
                 month = input.nextInt();
                 if (month > 12) {
-                    System.out.println("invalid month" + "\n" + "1:continue attempting" + "\n" + "2: back to main menu");
-                    continue_or_not();
+                    System.out.println("invalid month" + "\n" + "1:continue attempting" + "\n" + "2: back");
+                    int se = usefulmethods.continue_or_not();
+                    if(se == 2)
+                        act();
                 }
                 else
                     flag = 1 ;
@@ -85,8 +92,10 @@ public class AuthenticationService {
                 System.out.println("day:");
                 day = input.nextInt();
                 if (day > 30) {
-                    System.out.println("invalid day" + "\n" + "1:continue attempting" + "\n" + "2: back to main menu");
-                    continue_or_not();
+                    System.out.println("invalid day" + "\n" + "1:continue attempting" + "\n" + "2: back");
+                    int se = usefulmethods.continue_or_not();
+                    if(se == 2)
+                        act();
                 }
                 else
                     flag = 1 ;
@@ -98,11 +107,15 @@ public class AuthenticationService {
                 if (bio.length() <= 256)
                     break;
                 System.out.println("This String is very long .maximum valid length is 256");
-                System.out.println("1:continue attempting" + "\n" + "2: back to main menu");
-                continue_or_not();
+                System.out.println("1:continue attempting" + "\n" + "2: back");
+                int se = usefulmethods.continue_or_not();
+                if(se == 2)
+                    act();
             }
             User user = new User(firstname,lastname,username,password,birthDate,LocalDate.now(),bio);
             users.add(user);
+            System.out.println("Hi " +user.getFirstname() +".  welcome to your account");
+           j = (users.size() -1);
         }
 
     /**
@@ -112,7 +125,7 @@ public class AuthenticationService {
         String username;
         String password;
         int flag = 0;
-        toHexString tohexString = new toHexString();
+        usefulMethods usefulmethods = new usefulMethods();
         Scanner input = new Scanner(System.in);
         while (flag == 0) {
             System.out.println("username: ");
@@ -128,14 +141,17 @@ public class AuthenticationService {
                 try {
                     while (flg == 0) {
                         System.out.println("password :");
-                        password = tohexString.Run(tohexString.getSHA(input.next()));
+                        password = usefulmethods.toHexString(usefulmethods.getSHA(input.next()));
                         if (password.equals(users.get(i).getPassword())) {
                             System.out.println("Hi " + users.get(i).getFirstname() + ". welcome to your account");
                             flg = 1;
+                             j=i;
                         } else {
                             System.out.println("incorrect password!");
-                            System.out.println("1:continue attempting" + "\n" + "2: back to main menu");
-                            continue_or_not();
+                            System.out.println("1:continue attempting" + "\n" + "2: back");
+                            int se = usefulmethods.continue_or_not();
+                            if(se == 2)
+                                act();
                         }
 
                     }
@@ -146,8 +162,10 @@ public class AuthenticationService {
                 }
             } else {
                 System.out.println("There is no user with this username");
-                System.out.println("1:continue attempting" + "\n" + "2: back to main menu");
-                continue_or_not();
+                System.out.println("1:continue attempting" + "\n" + "2: back");
+                int se = usefulmethods.continue_or_not();
+                if(se == 2)
+                    act();
             }
         }
     }
@@ -163,17 +181,11 @@ public class AuthenticationService {
                 return true;
         }
     /**
-     * this method checks that person wants to continue attempting or to back to main menu
+     * getter
+     * @return index of user who signs in or signs up
      */
-    private void continue_or_not(){
-        int sel = 0;
-        while(sel != 1 && sel != 2){
-            Scanner input = new Scanner(System.in);
-            sel = input.nextInt();
-        }
-        if(sel == 1);
-        else
-            act();
+    public int getJ() {
+        return j;
     }
-
 }
+

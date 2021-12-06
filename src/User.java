@@ -7,8 +7,8 @@ import java.security.NoSuchAlgorithmException;
  * @author ashkan_mogharab
  */
 public class User {
-    //an object of toHexString class for converting password to hex string
-    private toHexString tohexString = new toHexString();
+    //an object of usefulMethods
+    private usefulMethods usefulmethods = new usefulMethods();
     //firstname of the user
     private String firstname;
     //lastname of the user
@@ -46,7 +46,7 @@ public class User {
                 this.firstname = firstname;
                 this.lastname = lastname;
                 this.username = username;
-                this.password =tohexString.Run(tohexString.getSHA(password));
+                this.password =usefulmethods.toHexString(usefulmethods.getSHA(password));
                 this.birthDate = birthDate;
                 this.registeryDate = registeryDate;
                 this.bio = bio;
@@ -110,7 +110,34 @@ public class User {
     public String getBio() {
         return bio;
     }
-
+    /**
+     * getter
+     * @return tweets of the user
+     */
+    public ArrayList<Tweet> getTweets() {
+        return tweets;
+    }
+    /**
+     * getter
+     * @return retweets of the user
+     */
+    public ArrayList<Tweet> getRetweets() {
+        return retweets;
+    }
+    /**
+     * getter
+     * @return followers of the user
+     */
+    public ArrayList<User> getFollowers() {
+        return followers;
+    }
+    /**
+     * getter
+     * @return favorite users of the user
+     */
+    public ArrayList<User> getFavoriteUsers() {
+        return favoriteUsers;
+    }
     /**
      * setter
      * @param firstname firstname of the user
