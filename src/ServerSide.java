@@ -26,11 +26,9 @@ public class ServerSide {
                 if (select == 1 || select == 2 || select == 3 || select == 4)
                     break;
             }
-                    if (select == 1) {
+                    if (select == 1)
                         tweetingService = new TweetingService(users, index);
-                        for (Tweet tweet : users.get(index).getTweets())
-                            System.out.println(tweet.toString());
-                    } else if (select == 2) ;
+                     else if (select == 2) ;
                         //ObserverService observerService = new ObserverService(users,index);
                     else if (select == 3) ;
                         //TimelineService timelineService = new TimelineService(users,index);

@@ -8,19 +8,21 @@ public class TweetingService {
     //an object of usefulMethods
     private usefulMethods usefulmethods = new usefulMethods();
     //users of ServerSide
-    private  ArrayList<User> users;
+    private ArrayList<User> users;
     //index of the user who wants to use from tweeting service
     private int index;
     // select of the person
     private int select;
+
     /**
      * creates a new tweeting service
+     *
      * @param users the user who wants to use tweeting service
      */
-    public TweetingService(ArrayList<User> users,int index){
+    public TweetingService(ArrayList<User> users, int index) {
         this.users = users;
         this.index = index;
-       act();
+        act();
     }
 
     /**
@@ -39,8 +41,8 @@ public class TweetingService {
 
             if (select == 1)
                 add();
-            else if (select == 2) ;
-                //remove();
+            else if (select == 2)
+                remove();
             else if (select == 3) ;
                 //retweet();
             else if (select == 4) ;
@@ -49,26 +51,82 @@ public class TweetingService {
 
         }
     }
+
     /**
      * this method adds a tweet to user's tweets
      */
-        private void add () {
-            String text;
-            Scanner input = new Scanner(System.in);
-            while (true) {
-                System.out.println("text:");
-                text = input.nextLine();
-                if (text.length() <= 256) {
-                    System.out.println("the Tweet created and added to your Tweets");
-                    break;
-                }
-                System.out.println("This String is very long .maximum valid length is 256");
-                System.out.println("1:continue attempting" + "\n" + "2: back ");
-                int se = usefulmethods.continue_or_not();
-                if(se == 2)
-                    act();
+    private void add() {
+        String text;
+        Scanner input = new Scanner(System.in);
+        while (true) {
+            System.out.println("text:");
+            text = input.nextLine();
+            if (text.length() <= 256) {
+                System.out.println("the Tweet created and added to your Tweets");
+                break;
             }
-            Tweet new_tweet = new Tweet(users.get(index),text,LocalDate.now());
-            users.get(index).getTweets().add(new_tweet);
+            System.out.println("This String is very long .maximum valid length is 256");
+            System.out.println("1:continue attempting" + "\n" + "2: back ");
+            int se = usefulmethods.continue_or_not();
+            if (se == 2)
+                act();
         }
+        Tweet new_tweet = new Tweet(users.get(index), text, LocalDate.now());
+        users.get(index).getTweets().add(new_tweet);
+    }
+
+    /**
+     * this method removes a tweet or retweet from user's tweets or retweets
+     */
+    private void remove() {
+        System.out.println("1:tweet" + '\n' + "2:retweet" + '\n' + "3:back");
+        Scanner input = new Scanner(System.in);
+        while (true) {
+            select = input.nextInt();
+            if (select == 1 || select == 2 || select == 3)
+                break;
+        }
+        if (select == 1) {
+            while (true) {
+                System.out.println("Tweet number: ");
+                int ix = input.nextInt() - 1;
+                if (is_valid_index(ix, 1)) {
+                    System.out.println(users.get(index).getTweets().get(ix).toString());
+                    users.get(index).getTweets().remove(ix);
+                    System.out.println("the Tweet removed from your Tweets");
+                    System.out.println("" +users.get(index).getTweets().size());
+                    break;
+                } else {
+                    System.out.println("The number you entered is bigger than number of tweets");
+                    System.out.println("1:continue attempting" + "\n" + "2: back");
+                    int se = usefulmethods.continue_or_not();
+                    if (se == 2)
+                        remove();
+                }
+            }
+        } else if (select == 2) ;
+        else act();
+    }
+
+    /**
+     * this method checks that ix is a valid index or not
+     *
+     * @param i  if it be 1 refers to tweets and if it be 2 refers to retweets
+     * @param ix the number which is checked that is an index or not
+     * @return returns true if it be an index .otherwise returns false
+     */
+    private boolean is_valid_index(int ix, int i) {
+        int flag = 0 ;
+        if (i == 1) {
+            if (ix < users.get(index).getTweets().size())
+                flag = 1;
+        }
+        else if (i == 2) {
+            if (ix < users.get(index).getRetweets().size())
+                flag = 1;
+        }
+        if(flag == 1)
+            return true;
+        return false;
+    }
 }
