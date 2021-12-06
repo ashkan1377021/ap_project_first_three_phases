@@ -31,8 +31,8 @@ public class AuthenticationService {
         }
         if(select == 1)
             signUp();
-        else if(select == 2);
-            //signIn();
+        else if(select == 2)
+            signIn();
         else
             System.exit(0);
     }
@@ -105,6 +105,52 @@ public class AuthenticationService {
             users.add(user);
         }
 
+    /**
+     * this method does sign in process
+     */
+    private void signIn() {
+        String username;
+        String password;
+        int flag = 0;
+        toHexString tohexString = new toHexString();
+        Scanner input = new Scanner(System.in);
+        while (flag == 0) {
+            System.out.println("username: ");
+            username = input.next();
+            int i;
+            for (i = 0; i < users.size(); i++)
+                if (users.get(i).getUsername().equals(username)) {
+                    flag = 1;
+                    break;
+                }
+            if (flag == 1) {
+                int flg = 0;
+                try {
+                    while (flg == 0) {
+                        System.out.println("password :");
+                        password = tohexString.Run(tohexString.getSHA(input.next()));
+                        if (password.equals(users.get(i).getPassword())) {
+                            System.out.println("Hi " + users.get(i).getFirstname() + ". welcome to your account");
+                            flg = 1;
+                        } else {
+                            System.out.println("incorrect password!");
+                            System.out.println("1:continue attempting" + "\n" + "2: back to main menu");
+                            continue_or_not();
+                        }
+
+                    }
+                }
+                // For specifying wrong message digest algorithms
+                catch (NoSuchAlgorithmException e) {
+                    System.out.println("Exception thrown for incorrect algorithm: " + e);
+                }
+            } else {
+                System.out.println("There is no user with this username");
+                System.out.println("1:continue attempting" + "\n" + "2: back to main menu");
+                continue_or_not();
+            }
+        }
+    }
     /**
      * this method checks that the username which person inserted is duplicate or not
      * @param username username which is checked that is duplicate or not

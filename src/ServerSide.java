@@ -10,7 +10,5 @@ public class ServerSide{
         User user1 = new User("ashkan","mogharab","ashkan1998","ashkan231998", LocalDate.of(1998,12,28),LocalDate.now(),"deymahi");
         users.add(user1);
         AuthenticationService authenticationService = new AuthenticationService(users);
-        for(User user : users)
-            System.out.println(user.toString());
     }
 }
