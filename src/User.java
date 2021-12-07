@@ -188,8 +188,8 @@ public class User {
                 ", registeryDate=" + registeryDate +
                 ", bio='" + bio + '\'' +
                 ", tweets=" + tweets.size() +
-                ", followers=" + followers.size() +
-                ", favoriteUsers=" + favoriteUsers.size() +
+                ", followers=" + followers.size()+'\''+
+                ", favoriteUsers=" + favoriteUsers.size() +'\''+
                 '}';
     }
 }

@@ -42,6 +42,10 @@ public class ServerSide {
                     System.out.println(user.toString());
                     for (Tweet tweet : user.getTweets())
                         System.out.println(tweet.toString());
+                    for (User User : user.getFollowers())
+                        System.out.println(User.getUsername());
+                    for (User User : user.getFavoriteUsers())
+                        System.out.println(User.getUsername());
                 }
             else break;
         }

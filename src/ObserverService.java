@@ -8,12 +8,14 @@ public class ObserverService {
     private int index;
     // select of the person
     private int select;
+
     /**
      * creates a new observer service
+     *
      * @param users users of ServerSide
      * @param index index of the user who wants to use observer service
      */
-    public  ObserverService(ArrayList<User> users, int index) {
+    public ObserverService(ArrayList<User> users, int index) {
         this.users = users;
         this.index = index;
         act();
@@ -25,19 +27,19 @@ public class ObserverService {
      */
     private void act() {
         while (true) {
-            System.out.println("Welcome to observer service" + "\n" + "1:follow a user " + '\n' + "2:stop following a user" + '\n' + "3:observe Tweets of favorite users" + '\n' + "4:back");
+            System.out.println("Welcome to observer service" + "\n" + "1:follow a user " + '\n' + "2:unfollow a user" + '\n' + "3:observe Tweets of favorite users" + '\n' + "4:back");
             while (true) {
                 Scanner input = new Scanner(System.in);
                 select = input.nextInt();
-                if (select == 1 || select == 2 || select == 3 || select == 4 )
+                if (select == 1 || select == 2 || select == 3 || select == 4)
                     break;
             }
 
             if (select == 1)
                 follow();
-            else if (select == 2);
-               // stop();
-            else if (select == 3);
+            else if (select == 2)
+                 unfollow();
+            else if (select == 3) ;
                 //observe();
             else
                 break;
@@ -49,7 +51,7 @@ public class ObserverService {
      */
     private void follow() {
         while (true) {
-            System.out.println("1:follow" +'\n' + "2:back");
+            System.out.println("1:follow" + '\n' + "2:back");
             Scanner input = new Scanner(System.in);
             while (true) {
                 select = input.nextInt();
@@ -84,8 +86,43 @@ public class ObserverService {
                             break;
                     }
                 }
+            } else break;
+        }
+    }
+    /**
+     * this method handles process of unfollowing a user
+     */
+    private void unfollow() {
+        while (true) {
+            System.out.println("1:unfollow" + '\n' + "2:back");
+            Scanner input = new Scanner(System.in);
+            while (true) {
+                select = input.nextInt();
+                if (select == 1 || select == 2)
+                    break;
             }
-            else break;
+            if (select == 1) {
+                int flag = 0;
+                int ix1;
+                while (true) {
+                    System.out.println("which of your favorite users you want to unfollow?(favorite user number)");
+                    ix1 = input.nextInt() - 1;
+                    if (ix1 < users.get(index).getFavoriteUsers().size()) {
+                        flag = 1;
+                           users.get(index).getFavoriteUsers().remove(users.get(ix1));
+                           users.get(ix1).getFollowers().remove(users.get(index));
+                            System.out.println("unfollowing this user successfully done");
+                        break;
+                    } else {
+                            System.out.println("The number you entered is bigger than number of favorite users!");
+                        System.out.println("1:continue attempting" + "\n" + "2: back");
+                        int se = usefulmethods.continue_or_not();
+                        if (se == 2)
+                            break;
+                    }
+                }
+            } else break;
         }
     }
 }
+
