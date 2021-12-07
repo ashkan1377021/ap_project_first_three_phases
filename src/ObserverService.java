@@ -1,4 +1,8 @@
 import java.util.*;
+/**
+ * this class has Methods that a user can follow and unfollow another userand also can observe Tweets of its favorite users
+ @author  ashkan_mogharab
+ */
 public class ObserverService {
     //an object of usefulMethods
     private usefulMethods usefulmethods = new usefulMethods();
@@ -67,7 +71,7 @@ public class ObserverService {
                     ix1 = input.nextInt() - 1;
                     if (ix1 < users.size() && ix1 != index) {
                         flag = 1;
-                        if (users.get(ix1).getFavoriteUsers().contains(users.get(index)))
+                        if (users.get(index).getFavoriteUsers().contains(users.get(ix1)))
                             System.out.println("You have already followed this user");
                         else {
                             users.get(ix1).getFollowers().add(users.get(index));

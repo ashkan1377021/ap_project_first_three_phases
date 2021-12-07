@@ -13,6 +13,7 @@ public class ServerSide {
         AuthenticationService authenticationService;
         TweetingService tweetingService;
         ObserverService observerService;
+        TimelineService timelineService;
         // select of the person
         int select;
         //index of user who signs in or signs up
@@ -35,13 +36,13 @@ public class ServerSide {
                 tweetingService = new TweetingService(users, index);
             else if (select == 2)
                  observerService = new ObserverService(users,index);
-            else if (select == 3) ;
-                //TimelineService timelineService = new TimelineService(users,index);
+            else if (select == 3)
+                 timelineService = new TimelineService(users.get(index));
             else if (select == 4)
                 for (User user : users) {
                     System.out.println(user.getUsername());
-                    for(int i = 0 ;i < user.getTweets().size();i++)
-                        System.out.println("Tweet " + (i+1) + " : text: " +user.getTweets().get(i).getText() + "  sendTime: " +user.getTweets().get(i).getSendDate() + "  " + user.getTweets().get(i).getLikes().size() + " likes");
+                    for (int i = 0; i < user.getTweets().size(); i++)
+                        System.out.println("Tweet " + (i + 1) + " : text: " + user.getTweets().get(i).getText() + "  sendTime: " + user.getTweets().get(i).getSendDate() + "  " + user.getTweets().get(i).getLikes().size() + " likes");
                 }
 
             else break;

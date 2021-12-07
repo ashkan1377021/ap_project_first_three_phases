@@ -1,19 +1,18 @@
 import java.time.*;
 import java.util.ArrayList;
-
 /**
  * this class holds details of a tweet
  * @author ashkan_mogharab
  */
 public class Tweet {
     //sender of the tweet
-    User sender;
+    private User sender;
     //users who liked  the tweet
-    ArrayList<User>likes;
+    private ArrayList<User>likes;
     //text of the tweet that its maximum length is 256
-    String text;
+    private String text;
     // send time of the tweet
-    LocalDateTime sendTime;
+    private LocalDateTime sendTime;
     /**
      * creates a new tweet
      * @param sender sender of the tweet

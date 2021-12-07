@@ -2,8 +2,7 @@ import java.math.BigInteger;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.Scanner;
-
+import java.util.*;
 /**
  * this class in Run method converts password to hexstring
  * @author ashkan_mogharab
@@ -51,5 +50,4 @@ public class usefulMethods{
         }
         return sel;
     }
-
 }
