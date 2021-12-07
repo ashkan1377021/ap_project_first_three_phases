@@ -39,8 +39,8 @@ public class ObserverService {
                 follow();
             else if (select == 2)
                  unfollow();
-            else if (select == 3) ;
-                //observe();
+            else if (select == 3)
+                observe();
             else
                 break;
         }
@@ -122,6 +122,30 @@ public class ObserverService {
                     }
                 }
             } else break;
+        }
+    }
+    /**
+     * this method shows tweets of favorite users of the user
+     */
+    private void observe(){
+        while (true) {
+            System.out.println("1:observe" + '\n' + "2:back");
+            Scanner input = new Scanner(System.in);
+            while (true) {
+                select = input.nextInt();
+                if (select == 1 || select == 2)
+                    break;
+            }
+            if (select == 1) {
+                for(User user : users.get(index).getFavoriteUsers()) {
+                    System.out.println(user.getUsername());
+                    for(int i = 0 ;i < user.getTweets().size();i++)
+                        System.out.println("Tweet " + (i+1) + " : text: " +user.getTweets().get(i).getText() + "  sendTime: " +user.getTweets().get(i).getSendDate() + "  " + user.getTweets().get(i).getLikes().size() + " likes");
+
+                }
+
+            }
+            else break;
         }
     }
 }

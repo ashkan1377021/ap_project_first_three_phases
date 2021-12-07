@@ -24,7 +24,7 @@ public class ServerSide {
         authenticationService = new AuthenticationService(users);
         index = authenticationService.getJ();
         while (true) {
-            System.out.println("Services:" + "\n" + "1:Tweeting Service" + '\n' + "2:Observer Service" + '\n' + "3:Timeline Service" + '\n' + "4:show users and their Tweets" + '\n' + "5:Quit");
+            System.out.println("Services:" + "\n" + "1:Tweeting Service" + '\n' + "2:Observer Service" + '\n' + "3:Timeline Service" + '\n' +"4:show some information about users" +'\n' + "5:Quit");
             while (true) {
                 Scanner input = new Scanner(System.in);
                 select = input.nextInt();
@@ -39,14 +39,11 @@ public class ServerSide {
                 //TimelineService timelineService = new TimelineService(users,index);
             else if (select == 4)
                 for (User user : users) {
-                    System.out.println(user.toString());
-                    for (Tweet tweet : user.getTweets())
-                        System.out.println(tweet.toString());
-                    for (User User : user.getFollowers())
-                        System.out.println(User.getUsername());
-                    for (User User : user.getFavoriteUsers())
-                        System.out.println(User.getUsername());
+                    System.out.println(user.getUsername());
+                    for(int i = 0 ;i < user.getTweets().size();i++)
+                        System.out.println("Tweet " + (i+1) + " : text: " +user.getTweets().get(i).getText() + "  sendTime: " +user.getTweets().get(i).getSendDate() + "  " + user.getTweets().get(i).getLikes().size() + " likes");
                 }
+
             else break;
         }
     }
