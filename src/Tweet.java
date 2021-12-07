@@ -12,20 +12,19 @@ public class Tweet {
     ArrayList<User>likes;
     //text of the tweet that its maximum length is 256
     String text;
-    // send date of the tweet
-    LocalDate sendDate;
-
+    // send time of the tweet
+    LocalDateTime sendTime;
     /**
      * creates a new tweet
      * @param sender sender of the tweet
      * @param text text of the tweet
-     * @param sendDate send date of the tweet
+     * @param sendTime send date of the tweet
      */
-    public Tweet(User sender, String text, LocalDate sendDate) {
+    public Tweet(User sender, String text, LocalDateTime sendTime) {
         this.sender = sender;
         this.likes = new ArrayList<>();
         this.text = text;
-        this.sendDate = sendDate;
+        this.sendTime = sendTime;
     }
 
     /**
@@ -51,10 +50,10 @@ public class Tweet {
     }
     /**
      * getter
-     * @return send date of the tweet
+     * @return send time of the tweet
      */
-    public LocalDate getSendDate() {
-        return sendDate;
+    public LocalDateTime getSendDate() {
+        return sendTime;
     }
 
     /**
@@ -73,10 +72,10 @@ public class Tweet {
     }
     /**
      * setter
-     * @param sendDate send date of the tweet
+     * @param sendTime send date of the tweet
      */
-    public void setSendDate(LocalDate sendDate) {
-        this.sendDate = sendDate;
+    public void setSendTime(LocalDateTime sendTime) {
+        this.sendTime = sendTime;
     }
 
     @Override
@@ -85,7 +84,7 @@ public class Tweet {
                 "sender=" + sender.getUsername() +
                 ", likes=" + likes.size() +
                 ", text='" + text + '\'' +
-                ", sendDate=" + sendDate +
+                ", sendTime=" + sendTime +
                 '}';
     }
 }

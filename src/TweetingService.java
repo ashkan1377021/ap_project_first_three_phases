@@ -16,8 +16,8 @@ public class TweetingService {
 
     /**
      * creates a new tweeting service
-     *
-     * @param users the user who wants to use tweeting service
+     * @param users users of ServerSide
+     * @param index index of the user who wants to use tweeting service
      */
     public TweetingService(ArrayList<User> users, int index) {
         this.users = users;
@@ -80,7 +80,7 @@ public class TweetingService {
                     break;
             }
             if (flag == 1) {
-                Tweet new_tweet = new Tweet(users.get(index), text, LocalDate.now());
+                Tweet new_tweet = new Tweet(users.get(index), text, java.time.LocalDateTime.now());
                 users.get(index).getTweets().add(new_tweet);
             }
         } else if (select == 2) {
@@ -204,7 +204,10 @@ public class TweetingService {
                         if(flag == 1 || flag1 == 1)
                             break;
                     } else {
-                        System.out.println("The number you entered is bigger than number of users or you wanted to like a Tweet of yourself!");
+                        if(ix1 == index)
+                            System.out.println("You can not like a Tweet of yourself!");
+                        else
+                            System.out.println("The number you entered is bigger than number of users!");
                         System.out.println("1:continue attempting" + "\n" + "2: back");
                         int se = usefulmethods.continue_or_not();
                         if (se == 2)
