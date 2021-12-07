@@ -87,7 +87,7 @@ public class Tweet {
     @Override
     public String toString() {
         return "Tweet{" +
-                "sender=" + sender +
+                "sender=" + sender.getUsername() +
                 ", likes=" + likes +
                 ", text='" + text + '\'' +
                 ", sendDate=" + sendDate +

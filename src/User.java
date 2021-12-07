@@ -25,9 +25,7 @@ public class User {
     private String bio ;
     //tweets of the user
     private ArrayList<Tweet> tweets;
-    //retweets of the user
-    private ArrayList<Tweet> retweets;
-    //retweets of the user
+    //followers of the user
     private ArrayList<User> followers;
     //favorite users of the user
     private ArrayList<User> favoriteUsers;
@@ -51,7 +49,6 @@ public class User {
                 this.registeryDate = registeryDate;
                 this.bio = bio;
                 tweets = new ArrayList<>();
-                retweets = new ArrayList<>();
                 followers = new ArrayList<>();
                 favoriteUsers = new ArrayList<>();
             }
@@ -119,13 +116,6 @@ public class User {
     }
     /**
      * getter
-     * @return retweets of the user
-     */
-    public ArrayList<Tweet> getRetweets() {
-        return retweets;
-    }
-    /**
-     * getter
      * @return followers of the user
      */
     public ArrayList<User> getFollowers() {
@@ -190,13 +180,16 @@ public class User {
     @Override
     public String toString() {
         return "User{" +
-                "firstname='" + firstname + '\'' +
+                ", firstname='" + firstname + '\'' +
                 ", lastname='" + lastname + '\'' +
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
                 ", birthDate=" + birthDate +
                 ", registeryDate=" + registeryDate +
                 ", bio='" + bio + '\'' +
+                ", tweets=" + tweets.size() +
+                ", followers=" + followers.size() +
+                ", favoriteUsers=" + favoriteUsers.size() +
                 '}';
     }
 }

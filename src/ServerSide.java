@@ -1,3 +1,5 @@
+import com.sun.deploy.security.SelectableSecurityManager;
+
 import java.time.*;
 import java.util.*;
 /**
@@ -19,7 +21,7 @@ public class ServerSide {
         authenticationService = new AuthenticationService(users);
         index = authenticationService.getJ();
         while (true) {
-            System.out.println("Services:" + "\n" + "1:Tweeting Service" + '\n' + "2:Observer Service" + '\n' + "3:Timeline Service" + '\n' + "4:Quit");
+            System.out.println("Services:" + "\n" + "1:Tweeting Service" + '\n' + "2:Observer Service" + '\n' + "3:Timeline Service" + '\n' + "4:show users and their Tweets" +'\n'+"5:Quit");
             while (true) {
                 Scanner input = new Scanner(System.in);
                 select = input.nextInt();
@@ -32,9 +34,15 @@ public class ServerSide {
                         //ObserverService observerService = new ObserverService(users,index);
                     else if (select == 3) ;
                         //TimelineService timelineService = new TimelineService(users,index);
-                    else
-                        break;
+                    else if(select == 4)
+                        for(User user :users) {
+                            System.out.println(user.toString());
+                            for(Tweet tweet :user.getTweets())
+                                System.out.println(tweet.toString());
+                        }
+                    else break;
                 }
+
             }
         }
 
