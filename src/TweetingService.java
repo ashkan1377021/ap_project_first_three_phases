@@ -42,8 +42,8 @@ public class TweetingService {
                 add();
             else if (select == 2)
                 remove();
-            else if (select == 3) ;
-                //like();
+            else if (select == 3)
+                like();
             else
                 break;
         }
@@ -157,6 +157,65 @@ public class TweetingService {
     }
     }
 
+    /**
+     *  * this method likes a tweet from a user's tweets
+     */
+   private void like(){
+        while(true){
+            System.out.println("1:like_tweet" + '\n' + "2:back");
+            Scanner input = new Scanner(System.in);
+            while (true) {
+                select = input.nextInt();
+                if (select == 1 || select == 2)
+                    break;
+            }
+            if (select == 1) {
+                int flag = 0;
+                int flag1 = 0;
+                int ix1;
+                int ix2 = -1;
+                while (true) {
+                    System.out.println("from Tweets of which user you want to like a Tweet?(user number)"+'\n'+
+                            "pay attention That you can not like your Tweets");
+                    ix1 = input.nextInt() - 1;
+                    if (ix1 < users.size() && ix1!=index) {
+                        while (true) {
+                            System.out.println("which Tweet you want to like?(Tweet number)");
+                            ix2 = input.nextInt() - 1;
+                            if (is_valid_index(ix1, ix2)) {
+                                flag = 1;
+                               if(users.get(ix1).getTweets().get(ix2).getLikes().contains(users.get(index)))
+                                   System.out.println("You have already liked this Tweet");
+                               else {
+                                   System.out.println("This Tweet liked successfully");
+                                   users.get(ix1).getTweets().get(ix2).getLikes().add(users.get(index));
+                               }
+                                break;
+                            } else {
+                                System.out.println("The number you entered is bigger than number of Tweets that this user has!");
+                                System.out.println("1:continue attempting" + "\n" + "2: back");
+                                int se = usefulmethods.continue_or_not();
+                                if (se == 2){
+                                    flag1 = 1 ;
+                                    break;
+                                }
+                            }
+                        }
+                        if(flag == 1 || flag1 == 1)
+                            break;
+                    } else {
+                        System.out.println("The number you entered is bigger than number of users or you wanted to like a Tweet of yourself!");
+                        System.out.println("1:continue attempting" + "\n" + "2: back");
+                        int se = usefulmethods.continue_or_not();
+                        if (se == 2)
+                            break;
+                    }
+                }
+
+            }
+            else break;
+        }
+   }
     /**
      * this method checks that ix is a valid index or not
      *

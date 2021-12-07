@@ -1,4 +1,6 @@
 import java.time.*;
+import java.util.ArrayList;
+
 /**
  * this class holds details of a tweet
  * @author ashkan_mogharab
@@ -6,8 +8,8 @@ import java.time.*;
 public class Tweet {
     //sender of the tweet
     User sender;
-    //number of likes of the tweet
-    int likes;
+    //users who liked  the tweet
+    ArrayList<User>likes;
     //text of the tweet that its maximum length is 256
     String text;
     // send date of the tweet
@@ -21,7 +23,7 @@ public class Tweet {
      */
     public Tweet(User sender, String text, LocalDate sendDate) {
         this.sender = sender;
-        this.likes = 0;
+        this.likes = new ArrayList<>();
         this.text = text;
         this.sendDate = sendDate;
     }
@@ -35,9 +37,9 @@ public class Tweet {
     }
     /**
      * getter
-     * @return number of likes of the tweet
+     * @return users who liked  the tweet
      */
-    public int getLikes() {
+    public ArrayList<User> getLikes() {
         return likes;
     }
     /**
@@ -64,13 +66,6 @@ public class Tweet {
     }
     /**
      * setter
-     * @param likes number of likes of the tweet
-     */
-    public void setLikes(int likes) {
-        this.likes = likes;
-    }
-    /**
-     * setter
      * @param text text of the tweet
      */
     public void setText(String text) {
@@ -88,7 +83,7 @@ public class Tweet {
     public String toString() {
         return "Tweet{" +
                 "sender=" + sender.getUsername() +
-                ", likes=" + likes +
+                ", likes=" + likes.size() +
                 ", text='" + text + '\'' +
                 ", sendDate=" + sendDate +
                 '}';

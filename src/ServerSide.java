@@ -17,32 +17,34 @@ public class ServerSide {
         //index of user who signs in or signs up
         int index;
         User user1 = new User("ashkan", "mogharab", "ashkan1998", "ashkan231998", LocalDate.of(1998, 12, 28), LocalDate.now(), "deymahi");
+        Tweet Tweet1 = new Tweet(user1, "Today is Monday", LocalDate.now());
+        user1.getTweets().add(Tweet1);
         users.add(user1);
         authenticationService = new AuthenticationService(users);
         index = authenticationService.getJ();
-        while (true) {
-            System.out.println("Services:" + "\n" + "1:Tweeting Service" + '\n' + "2:Observer Service" + '\n' + "3:Timeline Service" + '\n' + "4:show users and their Tweets" +'\n'+"5:Quit");
+        int flag = 0;
+        while (flag == 0) {
+            System.out.println("Services:" + "\n" + "1:Tweeting Service" + '\n' + "2:Observer Service" + '\n' + "3:Timeline Service" + '\n' + "4:show users and their Tweets" + '\n' + "5:Quit");
             while (true) {
                 Scanner input = new Scanner(System.in);
                 select = input.nextInt();
-                if (select == 1 || select == 2 || select == 3 || select == 4)
+                if (select == 1 || select == 2 || select == 3 || select == 4 || select == 5)
                     break;
             }
-                    if (select == 1)
-                        tweetingService = new TweetingService(users, index);
-                     else if (select == 2) ;
-                        //ObserverService observerService = new ObserverService(users,index);
-                    else if (select == 3) ;
-                        //TimelineService timelineService = new TimelineService(users,index);
-                    else if(select == 4)
-                        for(User user :users) {
-                            System.out.println(user.toString());
-                            for(Tweet tweet :user.getTweets())
-                                System.out.println(tweet.toString());
-                        }
-                    else break;
+            if (select == 1)
+                tweetingService = new TweetingService(users, index);
+            else if (select == 2) ;
+                //ObserverService observerService = new ObserverService(users,index);
+            else if (select == 3) ;
+                //TimelineService timelineService = new TimelineService(users,index);
+            else if (select == 4)
+                for (User user : users) {
+                    System.out.println(user.toString());
+                    for (Tweet tweet : user.getTweets())
+                        System.out.println(tweet.toString());
                 }
-
-            }
+            else break;
         }
+    }
+}
 

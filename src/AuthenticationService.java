@@ -26,7 +26,7 @@ public class AuthenticationService {
      * this method handles the works that should be done in authentication service
      */
     private void act(){
-            System.out.println("Welcome to Tweeter" + "\n" + "1:sign up" + '\n' + "2:Sign in" + '\n' + "3:back");
+            System.out.println("Welcome to Tweeter" + "\n" + "1:sign up" + '\n' + "2:Sign in" + '\n' + "3:Quit");
         while(true) {
             Scanner input = new Scanner(System.in);
             select = input.nextInt();
@@ -37,7 +37,8 @@ public class AuthenticationService {
             signUp();
         else if(select == 2)
             signIn();
-        else;
+        else
+            System.exit(0);
     }
 
     /**
