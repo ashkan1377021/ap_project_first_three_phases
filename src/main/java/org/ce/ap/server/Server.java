@@ -17,8 +17,12 @@ public class Server {
         //index of user who signs in or signs up
         int index;
         User user1 = new User("ashkan", "mogharab", "ashkan1998", "ashkan231998", LocalDate.of(1998, 12, 28), LocalDate.now(), "deymahi");
+        User user2 = new User("hossein", "karimi", "hossein1998", "hossein", LocalDate.of(1998, 12, 28), LocalDate.now(), "deymahi");
         Tweet Tweet1 = new Tweet(user1, "Today is Monday",java.time.LocalDateTime.now());
+        Tweet Tweet2 = new Tweet(user2, "Today is Tuesday",java.time.LocalDateTime.now());
+        Tweet2.getRetweets().add(user1);
         user1.getTweets().add(Tweet1);
+        user1.getTweets().add(Tweet2);
         users.add(user1);
         authenticationService = new AuthenticationServicelmpl(users);
         index = authenticationService.getJ();

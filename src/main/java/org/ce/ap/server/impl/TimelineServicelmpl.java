@@ -68,7 +68,7 @@ public class TimelineServicelmpl implements TimelineService {
                     System.out.println(favorite.getUsername());
                     tweets .sort(new Sort_by_sendTime());
                     for(int i = 0 ;i < tweets.size();i++)
-                        System.out.println("Tweet " + (i+1) + " : text: " +tweets.get(i).getText() + "  sendTime: " +tweets.get(i).getSendDate() + "  " + tweets.get(i).getLikes().size() + " likes" + tweets.get(i).getRetweets().size() + " retweets");
+                        System.out.println("Tweet " + (i+1) + " : text: " +tweets.get(i).getText() + "  sendTime: " +tweets.get(i).getSendDate() + "  " + tweets.get(i).getLikes().size() + " likes  " + tweets.get(i).getRetweets().size() + " retweets");
                 }
             }
             else
@@ -98,7 +98,7 @@ public class TimelineServicelmpl implements TimelineService {
                     System.out.println(favorite.getUsername());
                     retweets .sort(new Sort_by_sendTime());
                     for(int i = 0 ;i < retweets.size();i++)
-                        System.out.println("reTweet " + (i+1) + " : sender: " +retweets.get(i).getSender() +  "  text : " + "  sendTime: " +retweets.get(i).getSendDate() + "  " + retweets.get(i).getLikes().size() + " likes" + "  " + retweets.get(i).getRetweets().size() + " retweets");
+                        System.out.println("reTweet " + (i+1) + " : sender: " +retweets.get(i).getSender().getUsername() +  "  text: " + retweets.get(i).getText() + "  sendTime: " +retweets.get(i).getSendDate() + "  " + retweets.get(i).getLikes().size() + " likes  " + "  " + retweets.get(i).getRetweets().size() + " retweets");
                 }
 
             }
