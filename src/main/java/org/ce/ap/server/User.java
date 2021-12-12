@@ -1,3 +1,4 @@
+package main.java.org.ce.ap.server;
 import java.time.*;
 import java.util.ArrayList;
 import java.security.NoSuchAlgorithmException;
@@ -40,22 +41,22 @@ public class User {
      * @param bio bio of the user
      */
     public User(String firstname, String lastname, String username, String password, LocalDate birthDate, LocalDate registeryDate, String bio) {
-            try {
-                this.firstname = firstname;
-                this.lastname = lastname;
-                this.username = username;
-                this.password =usefulmethods.toHexString(usefulmethods.getSHA(password));
-                this.birthDate = birthDate;
-                this.registeryDate = registeryDate;
-                this.bio = bio;
-                tweets = new ArrayList<>();
-                followers = new ArrayList<>();
-                favoriteUsers = new ArrayList<>();
-            }
-            // For specifying wrong message digest algorithms
-            catch (NoSuchAlgorithmException e) {
-                System.out.println("Exception thrown for incorrect algorithm: " + e);
-            }
+        try {
+            this.firstname = firstname;
+            this.lastname = lastname;
+            this.username = username;
+            this.password =usefulmethods.toHexString(usefulmethods.getSHA(password));
+            this.birthDate = birthDate;
+            this.registeryDate = registeryDate;
+            this.bio = bio;
+            tweets = new ArrayList<>();
+            followers = new ArrayList<>();
+            favoriteUsers = new ArrayList<>();
+        }
+        // For specifying wrong message digest algorithms
+        catch (NoSuchAlgorithmException e) {
+            System.out.println("Exception thrown for incorrect algorithm: " + e);
+        }
     }
     /**
      * getter
@@ -193,3 +194,4 @@ public class User {
                 '}';
     }
 }
+

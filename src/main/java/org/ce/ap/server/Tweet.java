@@ -1,3 +1,4 @@
+package main.java.org.ce.ap.server;
 import java.time.*;
 import java.util.ArrayList;
 /**
@@ -9,6 +10,8 @@ public class Tweet {
     private User sender;
     //users who liked  the tweet
     private ArrayList<User>likes;
+    // users who retweeted the tweet
+    private ArrayList<User>retweets;
     //text of the tweet that its maximum length is 256
     private String text;
     // send time of the tweet
@@ -22,6 +25,7 @@ public class Tweet {
     public Tweet(User sender, String text, LocalDateTime sendTime) {
         this.sender = sender;
         this.likes = new ArrayList<>();
+        this.retweets = new ArrayList<>();
         this.text = text;
         this.sendTime = sendTime;
     }
@@ -39,6 +43,13 @@ public class Tweet {
      */
     public ArrayList<User> getLikes() {
         return likes;
+    }
+    /**
+     * getter
+     * @return usernames of users who retweeted the tweet
+     */
+    public ArrayList<User> getRetweets() {
+        return retweets;
     }
     /**
      * getter
@@ -79,11 +90,15 @@ public class Tweet {
 
     @Override
     public String toString() {
-        return "Tweet{" +
-                "sender=" + sender.getUsername() +
-                ", likes=" + likes.size() +
-                ", text='" + text + '\'' +
-                ", sendTime=" + sendTime +
-                '}';
+        ArrayList<String>liked_usernames = new ArrayList<>();
+        ArrayList<String>retweeted_usernames = new ArrayList<>();
+        for(int i = 0 ; i<likes.size();i++)
+            liked_usernames.add(likes.get(i).getUsername());
+        for(int i = 0 ; i<retweets.size();i++)
+            retweeted_usernames.add(retweets.get(i).getUsername());
+        return "text=" + text + ",   " +
+                "likes=" + liked_usernames.size()+",  "+
+                "reTweets=" + retweeted_usernames.size()+",    "+
+                "sendTime=" + sendTime;
     }
 }

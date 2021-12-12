@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="67c02f87-840b-4490-9d6a-b5581792b07f" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/Twitter.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/ce/ap/server/AuthenticationService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/ce/ap/server/ObserverService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/ce/ap/server/Server.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/ce/ap/server/Sort_by_sendTime.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/ce/ap/server/TimelineService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/ce/ap/server/Tweet.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/ce/ap/server/TweetingService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/ce/ap/server/User.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/ce/ap/server/impl/AuthenticationServicelmpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/ce/ap/server/impl/ObserverServicelmpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/ce/ap/server/impl/TimelineServicelmpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/ce/ap/server/impl/TweetingServicelmpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/ce/ap/server/usefulMethods.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ap_project.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ap_project/AuthenticationService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ap_project/ObserverService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ap_project/ServerSide.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ap_project/Sort_by_sendTime.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ap_project/TimelineService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ap_project/Tweet.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ap_project/TweetingService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ap_project/User.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ap_project/usefulMethods.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/AuthenticationService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ObserverService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ServerSide.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Sort_by_sendTime.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TimelineService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Tweet.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TweetingService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/User.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/usefulMethods.java" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Interface" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="22BAA3ru6X0UcOq13kNNNIEMNGC" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+  </component>
+  <component name="RunManager">
+    <configuration name="Run" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="main.java.org.ce.ap.server.Server" />
+      <module name="Twitter" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="67c02f87-840b-4490-9d6a-b5581792b07f" name="Changes" comment="" />
+      <created>1639300459970</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1639300459970</updated>
+      <workItem from="1639300461507" duration="2852000" />
+      <workItem from="1639303430538" duration="3003000" />
+      <workItem from="1639306474546" duration="17998000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+</project>

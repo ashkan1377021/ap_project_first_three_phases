@@ -1,3 +1,4 @@
+package main.java.org.ce.ap.server;
 import java.math.BigInteger;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
@@ -10,12 +11,12 @@ import java.util.*;
 public class usefulMethods{
     public  byte[] getSHA(String input) throws NoSuchAlgorithmException
     {
-            // Static getInstance method is called with hashing SHA
-            MessageDigest md = MessageDigest.getInstance("SHA-256");
+        // Static getInstance method is called with hashing SHA
+        MessageDigest md = MessageDigest.getInstance("SHA-256");
 
-            // digest() method called
-            // to calculate message digest of an input
-            // and return array of byte
+        // digest() method called
+        // to calculate message digest of an input
+        // and return array of byte
         return md.digest(input.getBytes(StandardCharsets.UTF_8));
     }
     /**
@@ -42,7 +43,7 @@ public class usefulMethods{
     /**
      * this method checks that person wants to continue attempting or back to main menu
      */
-   public int continue_or_not(){
+    public int continue_or_not(){
         int sel = 0;
         while(sel != 1 && sel != 2){
             Scanner input = new Scanner(System.in);

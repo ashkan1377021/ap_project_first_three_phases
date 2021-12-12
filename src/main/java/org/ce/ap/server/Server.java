@@ -1,19 +1,17 @@
-import com.sun.deploy.security.SelectableSecurityManager;
+package main.java.org.ce.ap.server;
+import main.java.org.ce.ap.server.impl.*;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Scanner;
 
-import java.time.*;
-import java.util.*;
-/**
- * this class holds details of a ServerSide
- * @author ashkan_mogharab
- */
-public class ServerSide {
+public class Server {
     public static void main(String[] args) {
         //users of ServerSide
         ArrayList<User> users = new ArrayList<>();
-        AuthenticationService authenticationService;
-        TweetingService tweetingService;
-        ObserverService observerService;
-        TimelineService timelineService;
+        AuthenticationServicelmpl authenticationService;
+        TweetingServicelmpl tweetingService;
+        ObserverServicelmpl observerService;
+        TimelineServicelmpl timelineService;
         // select of the person
         int select;
         //index of user who signs in or signs up
@@ -22,7 +20,7 @@ public class ServerSide {
         Tweet Tweet1 = new Tweet(user1, "Today is Monday",java.time.LocalDateTime.now());
         user1.getTweets().add(Tweet1);
         users.add(user1);
-        authenticationService = new AuthenticationService(users);
+        authenticationService = new AuthenticationServicelmpl(users);
         index = authenticationService.getJ();
         while (true) {
             System.out.println("Services:" + "\n" + "1:Tweeting Service" + '\n' + "2:Observer Service" + '\n' + "3:Timeline Service" + '\n' +"4:show some information about users" +'\n' + "5:Quit");
@@ -33,20 +31,24 @@ public class ServerSide {
                     break;
             }
             if (select == 1)
-                tweetingService = new TweetingService(users, index);
+                tweetingService = new TweetingServicelmpl(users, index);
             else if (select == 2)
-                 observerService = new ObserverService(users,index);
+                observerService = new ObserverServicelmpl(users,index);
             else if (select == 3)
-                 timelineService = new TimelineService(users.get(index));
+                timelineService = new TimelineServicelmpl(users.get(index));
             else if (select == 4)
                 for (User user : users) {
+                    int count1 = 1;
+                    int count2 = 1;
                     System.out.println(user.getUsername());
-                    for (int i = 0; i < user.getTweets().size(); i++)
-                        System.out.println("Tweet " + (i + 1) + " : text: " + user.getTweets().get(i).getText() + "  sendTime: " + user.getTweets().get(i).getSendDate() + "  " + user.getTweets().get(i).getLikes().size() + " likes");
-                }
+                    for (Tweet tweet : user.getTweets())
+                        if(tweet.getSender().equals(user))
+                        System.out.println("Tweet" + (count1++) + ":   " +tweet.toString());
+                        else
+                            System.out.println("reTweet" + (count2++) + ":   sender:" + tweet.getSender().getUsername()+ ",  " +tweet.toString());
 
+                }
             else break;
         }
     }
 }
-

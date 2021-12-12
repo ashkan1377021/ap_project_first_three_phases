@@ -1,3 +1,4 @@
+package main.java.org.ce.ap.server;
 import java.util.*;
 import java.util.*;
 /**
@@ -6,6 +7,6 @@ import java.util.*;
 public class Sort_by_sendTime implements Comparator<Tweet>{
     @Override
     public int compare(Tweet T1, Tweet T2) {
-        return T2.getSendDate().compareTo(T1.getSendDate());
+        return T1.getSendDate().compareTo(T2.getSendDate());
     }
 }

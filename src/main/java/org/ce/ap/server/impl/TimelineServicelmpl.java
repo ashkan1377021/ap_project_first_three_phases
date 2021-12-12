@@ -1,12 +1,17 @@
-import java.util.*;
+package main.java.org.ce.ap.server.impl;
+import main.java.org.ce.ap.server.*;
+import java.util.ArrayList;
+import java.util.Scanner;
 /**
  * this class has Methods that a user can observe its favorite users Tweets with their likes and reTweets
+ * @author ashkan_mogharab
+ * @version version 1 of TimelineService implementation
  */
-public class TimelineService {
+public class TimelineServicelmpl implements TimelineService {
     //the user which wants to observe its favorite users Tweets with their likes and reTweets
     private User user;
     //retweets of each favorite user
-    private ArrayList<Tweet>retweets;
+    private ArrayList<Tweet> retweets;
     //tweets of each favorite user
     private ArrayList<Tweet>tweets ;
     // select of the person
@@ -16,7 +21,7 @@ public class TimelineService {
      * creates a new timeline service
      * @param user the user which wants to observe its favorite users Tweets with their likes and reTweets
      */
-    public TimelineService(User user) {
+    public TimelineServicelmpl(User user) {
         this.user = user;
         act();
     }
@@ -35,7 +40,7 @@ public class TimelineService {
             if (select == 1)
                 showTweets();
             else if (select == 2)
-                 show_reTweets();
+                show_reTweets();
             else
                 break;
         }
@@ -63,7 +68,7 @@ public class TimelineService {
                     System.out.println(favorite.getUsername());
                     tweets .sort(new Sort_by_sendTime());
                     for(int i = 0 ;i < tweets.size();i++)
-                        System.out.println("Tweet " + (i+1) + " : text: " +tweets.get(i).getText() + "  sendTime: " +tweets.get(i).getSendDate() + "  " + tweets.get(i).getLikes().size() + " likes");
+                        System.out.println("Tweet " + (i+1) + " : text: " +tweets.get(i).getText() + "  sendTime: " +tweets.get(i).getSendDate() + "  " + tweets.get(i).getLikes().size() + " likes" + tweets.get(i).getRetweets().size() + " retweets");
                 }
             }
             else
@@ -93,7 +98,7 @@ public class TimelineService {
                     System.out.println(favorite.getUsername());
                     retweets .sort(new Sort_by_sendTime());
                     for(int i = 0 ;i < retweets.size();i++)
-                        System.out.println("reTweet " + (i+1) + " : text: " +retweets.get(i).getText() + "  sendTime: " +retweets.get(i).getSendDate() + "  " + retweets.get(i).getLikes().size() + " likes");
+                        System.out.println("reTweet " + (i+1) + " : sender: " +retweets.get(i).getSender() +  "  text : " + "  sendTime: " +retweets.get(i).getSendDate() + "  " + retweets.get(i).getLikes().size() + " likes" + "  " + retweets.get(i).getRetweets().size() + " retweets");
                 }
 
             }

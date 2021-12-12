@@ -1,9 +1,13 @@
-import java.util.*;
+package main.java.org.ce.ap.server.impl;
+import main.java.org.ce.ap.server.*;
+import java.util.ArrayList;
+import java.util.Scanner;
 /**
  * this class has Methods that a user can follow and unfollow another userand also can observe Tweets of its favorite users
  @author  ashkan_mogharab
+ @version version 1 of  ObserverService implementation
  */
-public class ObserverService {
+public class ObserverServicelmpl implements ObserverService {
     //an object of usefulMethods
     private usefulMethods usefulmethods = new usefulMethods();
     //users of ServerSide
@@ -19,7 +23,7 @@ public class ObserverService {
      * @param users users of ServerSide
      * @param index index of the user who wants to use observer service
      */
-    public ObserverService(ArrayList<User> users, int index) {
+    public ObserverServicelmpl(ArrayList<User> users, int index) {
         this.users = users;
         this.index = index;
         act();
@@ -42,7 +46,7 @@ public class ObserverService {
             if (select == 1)
                 follow();
             else if (select == 2)
-                 unfollow();
+                unfollow();
             else if (select == 3)
                 observe();
             else
@@ -113,12 +117,12 @@ public class ObserverService {
                     ix1 = input.nextInt() - 1;
                     if (ix1 < users.get(index).getFavoriteUsers().size()) {
                         flag = 1;
-                           users.get(index).getFavoriteUsers().remove(users.get(ix1));
-                           users.get(ix1).getFollowers().remove(users.get(index));
-                            System.out.println("unfollowing this user successfully done");
+                        users.get(index).getFavoriteUsers().remove(users.get(ix1));
+                        users.get(ix1).getFollowers().remove(users.get(index));
+                        System.out.println("unfollowing this user successfully done");
                         break;
                     } else {
-                            System.out.println("The number you entered is bigger than number of favorite users!");
+                        System.out.println("The number you entered is bigger than number of favorite users!");
                         System.out.println("1:continue attempting" + "\n" + "2: back");
                         int se = usefulmethods.continue_or_not();
                         if (se == 2)
@@ -141,10 +145,12 @@ public class ObserverService {
                     break;
             }
             if (select == 1) {
+                int count = 1;
                 for(User user : users.get(index).getFavoriteUsers()) {
                     System.out.println(user.getUsername());
                     for(int i = 0 ;i < user.getTweets().size();i++)
-                        System.out.println("Tweet " + (i+1) + " : text: " +user.getTweets().get(i).getText() + "  sendTime: " +user.getTweets().get(i).getSendDate() + "  " + user.getTweets().get(i).getLikes().size() + " likes");
+                        if(user.getTweets().get(i).getSender().equals(user))
+                        System.out.println("Tweet " + (count++) + " : text: " +user.getTweets().get(i).getText() + "  sendTime: " +user.getTweets().get(i).getSendDate() + "  " + user.getTweets().get(i).getLikes().size() + " likes" + "  " + user.getTweets().get(i).getRetweets().size() + " retweets");
 
                 }
 
@@ -153,4 +159,3 @@ public class ObserverService {
         }
     }
 }
-
