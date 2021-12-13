@@ -89,8 +89,8 @@ public class ObserverServicelmpl implements ObserverService {
                         else
                             System.out.println("The number you entered is bigger than number of users!");
                         System.out.println("1:continue attempting" + "\n" + "2: back");
-                        int se = usefulmethods.continue_or_not();
-                        if (se == 2)
+                        String se = usefulmethods.continue_or_not();
+                        if (se == "2")
                             break;
                     }
                 }
@@ -124,8 +124,8 @@ public class ObserverServicelmpl implements ObserverService {
                     } else {
                         System.out.println("The number you entered is bigger than number of favorite users!");
                         System.out.println("1:continue attempting" + "\n" + "2: back");
-                        int se = usefulmethods.continue_or_not();
-                        if (se == 2)
+                        String se = usefulmethods.continue_or_not();
+                        if (se == "2")
                             break;
                     }
                 }

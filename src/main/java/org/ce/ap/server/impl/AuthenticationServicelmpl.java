@@ -1,6 +1,10 @@
 package main.java.org.ce.ap.server.impl;
 import main.java.org.ce.ap.server.*;
-import java.security.NoSuchAlgorithmException;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.Socket;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -9,43 +13,62 @@ import java.util.Scanner;
  * @author ashkan_mogharab
  * @version version 1 of AuthenticationService implementation
  */
-public class AuthenticationServicelmpl implements AuthenticationService {
+
+    public class AuthenticationServicelmpl implements AuthenticationService {
+        //a socket for connecting  to user
+        Socket connectionSocket;
+        // an input stream
+        InputStream in ;
+        // an output stream
+        OutputStream out ;
+        //an array of bytes
+        byte[] buffer = new byte[2048];
+        //client number
+    int clientNum;
     //an object of usefulMethods
     private usefulMethods usefulmethods = new usefulMethods();
     //index of user who signs in or signs up
     private int j;
-    // select of the person
-    private int select;
     //users of ServerSide
     private ArrayList<User> users;
 
     /**
      * creates a new  authentication service
      */
-    public AuthenticationServicelmpl(ArrayList<User> users) {
+    public AuthenticationServicelmpl(ArrayList<User> users ,int clientNum ,Socket connectionSocket) {
         this.users = users;
-        act();
+        this.clientNum = clientNum;
+        this.connectionSocket = connectionSocket;
+                act();
     }
 
     /**
      * this method handles the works that should be done in authentication service
      */
     private void act() {
-        System.out.println("Welcome to Tweeter" + "\n" + "1:sign up" + '\n' + "2:Sign in" + '\n' + "3:Quit");
-        while (true) {
-            Scanner input = new Scanner(System.in);
-            select = input.nextInt();
-            if (select == 1 || select == 2 || select == 3)
-                break;
-        }
-        if (select == 1)
-            signUp();
-        else if (select == 2)
-            signIn();
-        else
-            System.exit(0);
-    }
+        String msg = "Welcome to Tweeter" + "\n" + "1:sign up" + '\n' + "2:Sign in" + '\n' + "3:Quit";
+        try {
+            out = connectionSocket.getOutputStream();
+            in = connectionSocket.getInputStream();
+            usefulmethods.send_message(out,msg);
+            System.out.println("welcoming message sent to client" + clientNum);
+            System.out.println("receive from client" + clientNum +" : " +(msg = usefulmethods.read_message(in)));
+            if(msg.equals("1"))
+                signUp();
+            else
+                if(msg.equals("2"))
+                    signIn();
+            else{
+                usefulmethods.send_message(out,"Goodbye.coming back soon");
+                System.out.println("client 1 Quited");
+                connectionSocket.close();
 
+            }
+        }
+        catch(IOException ex){
+            System.out.println(ex);
+        }
+    }
     /**
      * this method does sign up process
      */
@@ -56,71 +79,110 @@ public class AuthenticationServicelmpl implements AuthenticationService {
         String password;
         LocalDate birthDate;
         String bio;
-        System.out.println("sign up form :");
-        Scanner input = new Scanner(System.in);
-        System.out.println("first name :");
-        firstname = input.nextLine();
-        System.out.println("last name :");
-        lastname = input.nextLine();
-        while (true) {
-            System.out.println("username :");
-            username = input.nextLine();
-            if (username_is_valid(username))
-                break;
-            System.out.println("This username is duplicate" + "\n" + "1:continue attempting" + "\n" + "2: back");
-            int se = usefulmethods.continue_or_not();
-            if (se == 2)
-                act();
-        }
-        System.out.println("password :");
-        password = input.nextLine();
-        System.out.println("birthdate :");
-        int year = 0;
-        int month = 0;
-        int day = 0;
-        int flag = 0;
-        System.out.println("year :");
-        year = input.nextInt();
-        while (flag == 0) {
-            System.out.println("month:");
-            month = input.nextInt();
-            if (month > 12) {
-                System.out.println("invalid month" + "\n" + "1:continue attempting" + "\n" + "2: back");
-                int se = usefulmethods.continue_or_not();
-                if (se == 2)
+        System.out.println("process of client" +clientNum +" sign up started");
+        String msg = "sign up form :" +'\n' +"first name :";
+            usefulmethods.send_message(out, msg);
+            firstname = usefulmethods.read_message(in);
+            System.out.println("first name of client" + clientNum + " is:" + firstname);
+            usefulmethods.send_message(out, "last name :");
+            lastname = usefulmethods.read_message(in);
+            System.out.println("last name of client" + clientNum + " is:" + lastname);
+            Scanner input = new Scanner(System.in);
+
+            while (true) {
+                usefulmethods.send_message(out,"username :");
+                username = usefulmethods.read_message(in);
+                if (username_is_valid(username)) {
+                    usefulmethods.send_message(out,"true");
+                    System.out.println("username of client" + clientNum + " is:" + username);
+                    break;
+                }
+                usefulmethods.send_message(out,"false");
+                System.out.println("The username that client" +clientNum +" entered is duplicate.we requsted from it to choose continue attempting or back");
+                usefulmethods.send_message(out,("This username is duplicate" + "\n" + "1:continue attempting" + "\n" + "2: back"));
+
+                if ( usefulmethods.read_message(in) .equals("2")) {
+                    System.out.println("client" + clientNum + "choosed to back");
                     act();
-            } else
-                flag = 1;
-        }
-        flag = 0;
-        while (flag == 0) {
-            System.out.println("day:");
-            day = input.nextInt();
-            if (day > 30) {
-                System.out.println("invalid day" + "\n" + "1:continue attempting" + "\n" + "2: back");
-                int se = usefulmethods.continue_or_not();
-                if (se == 2)
+                }
+                else
+                    System.out.println("client" + clientNum + " choosed to continue attempting");
+            }
+            usefulmethods.send_message(out,"password :");
+            password = usefulmethods.read_message(in);
+        System.out.println("password of client" + clientNum + " is:" + password);
+            usefulmethods.send_message(out,("birthdate :" +'\n' +"year :"));
+            int year = 0;
+            int month = 0;
+            int day = 0;
+            int flag = 0;
+            year = Integer.parseInt(usefulmethods.read_message(in));
+            System.out.println("birthyear of client" +clientNum +" is:" +year);
+            while (flag == 0) {
+                usefulmethods.send_message(out,"month :");
+                month = Integer.parseInt(usefulmethods.read_message(in));
+                if (month > 12) {
+                    usefulmethods.send_message(out,"false");
+                    System.out.println("The month that client" +clientNum +" entered is invalid.we requsted from it to choose continue attempting or back");
+                    usefulmethods.send_message(out,("invalid month" + "\n" + "1:continue attempting" + "\n" + "2: back"));
+                    if ( usefulmethods.read_message(in) .equals("2")) {
+                        System.out.println("client" + clientNum + " choosed to back");
+                        act();
+                    }
+                    else
+                        System.out.println("client" + clientNum + " choosed to continue attempting");
+
+                } else {
+                    flag = 1;
+                    usefulmethods.send_message(out,"true");
+                    System.out.println("birthmonth of client" + clientNum + " is:" + month);
+                }
+            }
+            flag = 0;
+            while (flag == 0) {
+                usefulmethods.send_message(out,"day :");
+                day = Integer.parseInt(usefulmethods.read_message(in));
+                if(day > 30){
+                    usefulmethods.send_message(out,"false");
+                    System.out.println("The day that client" +clientNum +" entered is invalid.we requsted from it to choose continue attempting or back");
+                    usefulmethods.send_message(out,("invalid day" + "\n" + "1:continue attempting" + "\n" + "2: back"));
+                    if ( usefulmethods.read_message(in) .equals("2")) {
+                        System.out.println("client" + clientNum + " choosed to back");
+                        act();
+                    }
+                    else
+                        System.out.println("client" + clientNum + " choosed to continue attempting");
+
+                } else {
+                    flag = 1;
+                    usefulmethods.send_message(out,"true");
+                    System.out.println("birthday of client" + clientNum + " is:" + day);
+                }
+            }
+            birthDate = LocalDate.of(year, month, day);
+            while (true) {
+                usefulmethods.send_message(out,"Bio :");
+                bio = usefulmethods.read_message(in);
+                if (bio.length() <= 256) {
+                    usefulmethods.send_message(out,"true");
+                    System.out.println("Bio of client" + clientNum + " is: " +bio);
+                    break;
+                }
+                usefulmethods.send_message(out,"false");
+                System.out.println("The String that client"+ clientNum + " entered is very long .maximum valid length is 256. we requsted from it to choose continue attempting or back");
+                usefulmethods.send_message(out,("long String(maximum length is 256)" + "\n" + "1:continue attempting" + "\n" + "2: back"));
+                if ( usefulmethods.read_message(in) .equals("2")) {
+                    System.out.println("client" + clientNum + " choosed to back");
                     act();
-            } else
-                flag = 1;
-        }
-        birthDate = LocalDate.of(year, month, day);
-        while (true) {
-            System.out.println("Bio:");
-            input.nextLine();
-            bio = input.nextLine();
-            if (bio.length() <= 256)
-                break;
-            System.out.println("This String is very long .maximum valid length is 256");
-            System.out.println("1:continue attempting" + "\n" + "2: back");
-            int se = usefulmethods.continue_or_not();
-            if (se == 2)
-                act();
-        }
-        User user = new User(firstname, lastname, username, password, birthDate, LocalDate.now(), bio);
-        users.add(user);
-        System.out.println("Hi " + user.getFirstname() + ".  welcome to your account");
-        j = (users.size() - 1);
+                }
+                else
+                    System.out.println("client" + clientNum + " choosed to continue attempting");
+            }
+            User user = new User(firstname, lastname, username, password, birthDate, LocalDate.now(), bio);
+            users.add(user);
+            usefulmethods.send_message(out,("Hi " + user.getFirstname() + ".  welcome to your account"));
+            j = (users.size() - 1);
+            System.out.println(user.getUsername() + " got " + (j +1) + "th user between users");
     }
 
     /**
@@ -131,46 +193,51 @@ public class AuthenticationServicelmpl implements AuthenticationService {
         String password;
         int flag = 0;
         usefulMethods usefulmethods = new usefulMethods();
-        Scanner input = new Scanner(System.in);
+
         while (flag == 0) {
-            System.out.println("username: ");
-            username = input.nextLine();
+            usefulmethods.send_message(out,"username: ");
+            username =usefulmethods.read_message(in);
             int i;
             for (i = 0; i < users.size(); i++)
                 if (users.get(i).getUsername().equals(username)) {
                     flag = 1;
+                    usefulmethods.send_message(out,"true");
+                    System.out.println("The username that client" + clientNum + " entered (" + username +") was existed");
                     break;
                 }
             if (flag == 1) {
                 int flg = 0;
-                try {
                     while (flg == 0) {
-                        System.out.println("password :");
-                        password = usefulmethods.toHexString(usefulmethods.getSHA(input.nextLine()));
+                       usefulmethods.send_message(out,"password :");
+                        password = usefulmethods.read_message(in);
                         if (password.equals(users.get(i).getPassword())) {
-                            System.out.println("Hi " + users.get(i).getFirstname() + ". welcome to your account");
+                            usefulmethods.send_message(out,"true");
+                            System.out.println("The password that client" + clientNum + " entered (" +password+ ") was correct and signed in its account");
+                            usefulmethods.send_message(out,"Hi " + users.get(i).getFirstname() + ". welcome to your account");
                             flg = 1;
                             j = i;
                         } else {
-                            System.out.println("incorrect password!");
-                            System.out.println("1:continue attempting" + "\n" + "2: back");
-                            int se = usefulmethods.continue_or_not();
-                            if (se == 2)
+                            usefulmethods.send_message(out,"false");
+                            System.out.println("The password that client"+ clientNum + " entered (" + password +") was incorrect . we requsted from it to choose continue attempting or back");
+                            usefulmethods.send_message(out,"incorrect password!"+ "\n" + "1:continue attempting" + "\n" + "2: back");
+                            if ( usefulmethods.read_message(in) .equals("2")) {
+                                System.out.println("client" + clientNum + " choosed to back");
                                 act();
+                            }
+                            else
+                                System.out.println("client" + clientNum + " choosed to continue attempting");
                         }
-
-                    }
-                }
-                // For specifying wrong message digest algorithms
-                catch (NoSuchAlgorithmException e) {
-                    System.out.println("Exception thrown for incorrect algorithm: " + e);
                 }
             } else {
-                System.out.println("There is no user with this username");
-                System.out.println("1:continue attempting" + "\n" + "2: back");
-                int se = usefulmethods.continue_or_not();
-                if (se == 2)
+                usefulmethods.send_message(out,"false");
+                System.out.println("The username that client"+ clientNum + " entered (" +username + ") was not in system . we requsted from it to choose continue attempting or back");
+               usefulmethods.send_message(out,"There is no user with this username"+ "\n" + "1:continue attempting" + "\n" + "2: back");
+                if ( usefulmethods.read_message(in) .equals("2")) {
+                    System.out.println("client" + clientNum + " choosed to back");
                     act();
+                }
+                else
+                    System.out.println("client" + clientNum + " choosed to continue attempting");
             }
         }
     }

@@ -132,6 +132,7 @@ public class User {
     public ArrayList<User> getFavoriteUsers() {
         return favoriteUsers;
     }
+
     /**
      * getter
      * @return liked tweets

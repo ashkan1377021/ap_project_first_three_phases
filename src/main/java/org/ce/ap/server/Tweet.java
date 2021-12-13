@@ -66,28 +66,6 @@ public class Tweet {
         return sendTime;
     }
 
-    /**
-     * setter
-     * @param sender sender of the tweet
-     */
-    public void setSender(User sender) {
-        this.sender = sender;
-    }
-    /**
-     * setter
-     * @param text text of the tweet
-     */
-    public void setText(String text) {
-        this.text = text;
-    }
-    /**
-     * setter
-     * @param sendTime send date of the tweet
-     */
-    public void setSendTime(LocalDateTime sendTime) {
-        this.sendTime = sendTime;
-    }
-
     @Override
     public String toString() {
         ArrayList<String>liked_usernames = new ArrayList<>();

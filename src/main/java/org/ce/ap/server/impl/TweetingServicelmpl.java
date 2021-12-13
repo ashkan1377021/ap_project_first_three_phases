@@ -78,8 +78,8 @@ public class TweetingServicelmpl implements TweetingService {
                     }
                     System.out.println("This String is very long .maximum valid length is 256");
                     System.out.println("1:continue attempting" + "\n" + "2: back ");
-                    int se = usefulmethods.continue_or_not();
-                    if (se == 2)
+                    String se = usefulmethods.continue_or_not();
+                    if (se == "2")
                         break;
                 }
                 if (flag == 1) {
@@ -111,8 +111,8 @@ public class TweetingServicelmpl implements TweetingService {
                             } else {
                                 System.out.println("The number you entered is bigger than number of Tweets that this user has!");
                                 System.out.println("1:continue attempting" + "\n" + "2: back");
-                                int se = usefulmethods.continue_or_not();
-                                if (se == 2){
+                                String se = usefulmethods.continue_or_not();
+                                if (se == "2"){
                                     flag1 = 1 ;
                                     break;
                                 }
@@ -123,8 +123,8 @@ public class TweetingServicelmpl implements TweetingService {
                     } else {
                         System.out.println("The number you entered is bigger than number of users!");
                         System.out.println("1:continue attempting" + "\n" + "2: back");
-                        int se = usefulmethods.continue_or_not();
-                        if (se == 2)
+                        String se = usefulmethods.continue_or_not();
+                        if (se == "2")
                             break;
                     }
                 }
@@ -156,8 +156,8 @@ public class TweetingServicelmpl implements TweetingService {
                     } else {
                         System.out.println("The number you entered is bigger than number of tweets");
                         System.out.println("1:continue attempting" + "\n" + "2: back");
-                        int se = usefulmethods.continue_or_not();
-                        if (se == 2)
+                        String se = usefulmethods.continue_or_not();
+                        if (se == "2")
                             break;
                     }
                 }
@@ -203,8 +203,8 @@ public class TweetingServicelmpl implements TweetingService {
                             } else {
                                 System.out.println("The number you entered is bigger than number of Tweets that this user has!");
                                 System.out.println("1:continue attempting" + "\n" + "2: back");
-                                int se = usefulmethods.continue_or_not();
-                                if (se == 2){
+                                String se = usefulmethods.continue_or_not();
+                                if (se == "2"){
                                     flag1 = 1 ;
                                     break;
                                 }
@@ -218,8 +218,8 @@ public class TweetingServicelmpl implements TweetingService {
                         else
                             System.out.println("The number you entered is bigger than number of users!");
                         System.out.println("1:continue attempting" + "\n" + "2: back");
-                        int se = usefulmethods.continue_or_not();
-                        if (se == 2)
+                        String se = usefulmethods.continue_or_not();
+                        if (se == "2")
                             break;
                     }
                 }

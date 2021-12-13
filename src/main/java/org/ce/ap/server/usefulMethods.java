@@ -1,4 +1,7 @@
 package main.java.org.ce.ap.server;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.math.BigInteger;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
@@ -43,12 +46,45 @@ public class usefulMethods{
     /**
      * this method checks that person wants to continue attempting or back to main menu
      */
-    public int continue_or_not(){
-        int sel = 0;
-        while(sel != 1 && sel != 2){
+    public String continue_or_not(){
+        String sel ="-1";
+        while((!(sel .equals("1"))) && (!(sel.equals("2")))){
             Scanner input = new Scanner(System.in);
-            sel = input.nextInt();
+            sel = input.nextLine();
         }
         return sel;
+    }
+
+    /**
+     * this method sends a message to its destination
+     * @param out an output stream
+     * @param string a message
+     */
+    public void send_message(OutputStream out , String string){
+        try{
+            out.write(string.getBytes());
+        }
+        catch(IOException ex){
+            System.out.println(ex);
+        }
+    }
+
+    /**
+     * this method reads a message from its source
+     * @param in an input stream
+     * @return message
+     */
+    public String read_message(InputStream in){
+        String message = null;
+        try {
+            byte[] buffer = new byte[2048];
+            int read = in.read(buffer);
+             new String(buffer, 0, read);
+             message = new String(buffer,0,read);
+        }
+        catch(IOException ex){
+            System.out.println(ex);
+        }
+        return message;
     }
 }

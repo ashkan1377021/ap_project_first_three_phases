@@ -10,10 +10,6 @@ import java.util.Scanner;
 public class TimelineServicelmpl implements TimelineService {
     //the user which wants to observe its favorite users Tweets with their likes and reTweets
     private User user;
-    //retweets of each favorite user
-    private ArrayList<Tweet> retweets;
-    //tweets of each favorite user
-    private ArrayList<Tweet>tweets ;
     // select of the person
     private int select;
 
@@ -30,11 +26,11 @@ public class TimelineServicelmpl implements TimelineService {
      */
     private void act() {
         while (true) {
-            System.out.println("Welcome to Timeline service" + "\n" + "1:Tweets and reTweets of favorite users" + '\n'  + "2:back");
+            System.out.println("Welcome to Timeline service" + "\n" + "1:Tweets and reTweets of favorite users" + '\n' + "2:back");
             while (true) {
                 Scanner input = new Scanner(System.in);
                 select = input.nextInt();
-                if (select == 1 || select == 2 )
+                if (select == 1 || select == 2)
                     break;
             }
             if (select == 1)
@@ -67,16 +63,16 @@ public class TimelineServicelmpl implements TimelineService {
                             System.out.println("Tweet " + (count1++) + " : text: " + tweets.get(i).getText() + "  sendTime: " + tweets.get(i).getSendDate() + "  " + tweets.get(i).getLikes().size() + " likes  " + tweets.get(i).getRetweets().size() + " retweets");
                         else
                             System.out.println("reTweet " + (count2++) + ": Sender: " + tweets.get(i).getSender().getUsername() + " : text: " + tweets.get(i).getText() + "  sendTime: " + tweets.get(i).getSendDate() + "  " + tweets.get(i).getLikes().size() + " likes  " + tweets.get(i).getRetweets().size() + " retweets");
-                        ArrayList<User>special_likers = new ArrayList<>();
-                        for(User liker : tweets.get(i).getLikes())
-                            if(user.getFavoriteUsers().contains(liker))
-                                special_likers.add(liker);
-                            ArrayList<String> special_likers_username = new ArrayList<>();
-                            for(int j = 0 ; j<special_likers.size();j++)
-                                special_likers_username.add(special_likers.get(j).getUsername());
+                    ArrayList<User>special_likers = new ArrayList<>();
+                    for(User liker : tweets.get(i).getLikes())
+                        if(user.getFavoriteUsers().contains(liker))
+                            special_likers.add(liker);
+                        ArrayList<String> special_likers_username = new ArrayList<>();
+                        for(int j = 0 ; j<special_likers.size();j++)
+                            special_likers_username.add(special_likers.get(j).getUsername());
                         System.out.println("liked by " + special_likers_username);
                     }
-                    System.out.println('\n');
+                        System.out.println('\n');
                 }
             }
             else
