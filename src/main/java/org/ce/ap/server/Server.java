@@ -20,10 +20,13 @@ public class Server {
         User user2 = new User("hossein", "karimi", "hossein1998", "hossein", LocalDate.of(1998, 12, 28), LocalDate.now(), "deymahi");
         Tweet Tweet1 = new Tweet(user1, "Today is Monday",java.time.LocalDateTime.now());
         Tweet Tweet2 = new Tweet(user2, "Today is Tuesday",java.time.LocalDateTime.now());
-        Tweet2.getRetweets().add(user1);
+
         user1.getTweets().add(Tweet1);
-        user1.getTweets().add(Tweet2);
+        user2.getTweets().add(Tweet2);
+        Tweet1.getLikes().add(user2);
+        user2.getLiked().add(Tweet1);
         users.add(user1);
+        users.add(user2);
         authenticationService = new AuthenticationServicelmpl(users);
         index = authenticationService.getJ();
         while (true) {
@@ -45,6 +48,7 @@ public class Server {
                     int count1 = 1;
                     int count2 = 1;
                     System.out.println(user.getUsername());
+                    System.out.println("favorite Tweets: " + user.getLiked());
                     for (Tweet tweet : user.getTweets())
                         if(tweet.getSender().equals(user))
                         System.out.println("Tweet" + (count1++) + ":   " +tweet.toString());

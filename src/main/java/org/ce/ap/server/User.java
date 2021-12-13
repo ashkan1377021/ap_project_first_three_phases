@@ -30,6 +30,8 @@ public class User {
     private ArrayList<User> followers;
     //favorite users of the user
     private ArrayList<User> favoriteUsers;
+    //liked tweets
+    private ArrayList<Tweet>liked;
     /**
      * creates a new user
      * @param firstname firstname of the user
@@ -52,6 +54,7 @@ public class User {
             tweets = new ArrayList<>();
             followers = new ArrayList<>();
             favoriteUsers = new ArrayList<>();
+            liked = new ArrayList<>();
         }
         // For specifying wrong message digest algorithms
         catch (NoSuchAlgorithmException e) {
@@ -130,53 +133,11 @@ public class User {
         return favoriteUsers;
     }
     /**
-     * setter
-     * @param firstname firstname of the user
+     * getter
+     * @return liked tweets
      */
-    public void setFirstname(String firstname) {
-        this.firstname = firstname;
-    }
-    /**
-     * setter
-     * @param lastname lastname of the user
-     */
-    public void setLastname(String lastname) {
-        this.lastname = lastname;
-    }
-    /**
-     * setter
-     * @param username  username of the user
-     */
-    public void setUsername(String username) {
-        this.username = username;
-    }
-    /**
-     * setter
-     * @param password  password of the user
-     */
-    public void setPassword(String password) {
-        this.password = password;
-    }
-    /**
-     * setter
-     * @param birthDate birthDate of the user
-     */
-    public void setBirthDate(LocalDate birthDate) {
-        this.birthDate = birthDate;
-    }
-    /**
-     * setter
-     * @param registeryDate registeryDate of the user
-     */
-    public void setRegisteryDate(LocalDate registeryDate) {
-        this.registeryDate = registeryDate;
-    }
-    /**
-     * setter
-     * @param bio bio of the user
-     */
-    public void setBio(String bio) {
-        this.bio = bio;
+    public ArrayList<Tweet> getLiked() {
+        return liked;
     }
 
     @Override

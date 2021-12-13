@@ -197,6 +197,7 @@ public class TweetingServicelmpl implements TweetingService {
                                 else {
                                     System.out.println("This Tweet liked successfully");
                                     users.get(ix1).getTweets().get(ix2).getLikes().add(users.get(index));
+                                    users.get(index).getLiked().add(users.get(ix1).getTweets().get(ix2));
                                 }
                                 break;
                             } else {

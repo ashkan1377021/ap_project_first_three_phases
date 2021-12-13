@@ -30,17 +30,15 @@ public class TimelineServicelmpl implements TimelineService {
      */
     private void act() {
         while (true) {
-            System.out.println("Welcome to Timeline service" + "\n" + "1:Tweets of favorite users" + '\n' + "2:reTweets of favorite users" + '\n' + "3:back");
+            System.out.println("Welcome to Timeline service" + "\n" + "1:Tweets and reTweets of favorite users" + '\n'  + "2:back");
             while (true) {
                 Scanner input = new Scanner(System.in);
                 select = input.nextInt();
-                if (select == 1 || select == 2 || select == 3)
+                if (select == 1 || select == 2 )
                     break;
             }
             if (select == 1)
                 showTweets();
-            else if (select == 2)
-                show_reTweets();
             else
                 break;
         }
@@ -57,58 +55,33 @@ public class TimelineServicelmpl implements TimelineService {
                 if (select == 1 || select == 2)
                     break;
             }
-            if(select == 1){
-                tweets = new ArrayList<>();
-                for(User favorite : user.getFavoriteUsers()) {
-                    for (int i = 0; i < favorite.getTweets().size(); i++) {
-                        if (favorite.getTweets().get(i).getSender().equals(favorite)) {
-                            tweets.add(favorite.getTweets().get(i));
-                        }
-                    }
+            if(select == 1) {
+                for (User favorite : user.getFavoriteUsers()) {
                     System.out.println(favorite.getUsername());
-                    tweets .sort(new Sort_by_sendTime());
-                    for(int i = 0 ;i < tweets.size();i++)
-                        System.out.println("Tweet " + (i+1) + " : text: " +tweets.get(i).getText() + "  sendTime: " +tweets.get(i).getSendDate() + "  " + tweets.get(i).getLikes().size() + " likes  " + tweets.get(i).getRetweets().size() + " retweets");
+                    ArrayList<Tweet> tweets = favorite.getTweets();
+                    int count1 = 1;
+                    int count2 = 1;
+                    tweets.sort(new Sort_by_sendTime());
+                    for (int i = 0; i < tweets.size(); i++) {
+                        if (tweets.get(i).getSender().equals(favorite))
+                            System.out.println("Tweet " + (count1++) + " : text: " + tweets.get(i).getText() + "  sendTime: " + tweets.get(i).getSendDate() + "  " + tweets.get(i).getLikes().size() + " likes  " + tweets.get(i).getRetweets().size() + " retweets");
+                        else
+                            System.out.println("reTweet " + (count2++) + ": Sender: " + tweets.get(i).getSender().getUsername() + " : text: " + tweets.get(i).getText() + "  sendTime: " + tweets.get(i).getSendDate() + "  " + tweets.get(i).getLikes().size() + " likes  " + tweets.get(i).getRetweets().size() + " retweets");
+                        ArrayList<User>special_likers = new ArrayList<>();
+                        for(User liker : tweets.get(i).getLikes())
+                            if(user.getFavoriteUsers().contains(liker))
+                                special_likers.add(liker);
+                            ArrayList<String> special_likers_username = new ArrayList<>();
+                            for(int j = 0 ; j<special_likers.size();j++)
+                                special_likers_username.add(special_likers.get(j).getUsername());
+                        System.out.println("liked by " + special_likers_username);
+                    }
+                    System.out.println('\n');
                 }
             }
             else
                 break;
         }
     }
-    /**
-     * this method shows reTweets of each favorite user
-     */
-    private void show_reTweets(){
-        while(true) {
-            System.out.println("1:show reTweets" + '\n' + "2:back");
-            Scanner input = new Scanner(System.in);
-            while (true) {
-                select = input.nextInt();
-                if (select == 1 || select == 2)
-                    break;
-            }
-            if(select == 1){
-                retweets =  new ArrayList<>();
-                for(User favorite : user.getFavoriteUsers()) {
-                    for (int i = 0; i < favorite.getTweets().size(); i++) {
-                        if (!(favorite.getTweets().get(i).getSender().equals(favorite))) {
-                            retweets.add(favorite.getTweets().get(i));
-                        }
-                    }
-                    System.out.println(favorite.getUsername());
-                    retweets .sort(new Sort_by_sendTime());
-                    for(int i = 0 ;i < retweets.size();i++)
-                        System.out.println("reTweet " + (i+1) + " : sender: " +retweets.get(i).getSender().getUsername() +  "  text: " + retweets.get(i).getText() + "  sendTime: " +retweets.get(i).getSendDate() + "  " + retweets.get(i).getLikes().size() + " likes  " + "  " + retweets.get(i).getRetweets().size() + " retweets");
-                }
 
-            }
-            else
-                break;
-
-
-
-
-        }
-
-    }
 }
