@@ -1,12 +1,10 @@
 package main.java.org.ce.ap.server.impl;
 import main.java.org.ce.ap.server.*;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.Socket;
 import java.util.ArrayList;
-import java.util.Scanner;
 /**
  * this class has Methods that a user can observe its favorite users Tweets with their likes and reTweets
  * @author ashkan_mogharab
@@ -96,7 +94,7 @@ public class TimelineService_impl implements TimelineService {
                         System.out.println('\n');
 
                 }
-                System.out.println("process of observe Timeline by " + user.getUsername()+"ended");
+                System.out.println("process of observe Timeline by " + user.getUsername()+" ended");
             }
             else {
                 System.out.println(user.getUsername()+ " backed to Timeline service menu");

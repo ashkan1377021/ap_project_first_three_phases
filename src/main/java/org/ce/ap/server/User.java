@@ -44,7 +44,6 @@ public class User {
             this.firstname = firstname;
             this.lastname = lastname;
             this.username = username;
-            //an object of usefulMethods
             usefulMethods usefulmethods = new usefulMethods();
             this.password = usefulmethods.toHexString(usefulmethods.getSHA(password));
             this.birthDate = birthDate;
@@ -61,19 +60,11 @@ public class User {
         }
     }
     /**
-     * getter
-     * @return firstname of the user
+     getter
+     * @return first name of the user
      */
     public String getFirstname() {
         return firstname;
-    }
-
-    /**
-     getter
-     * @return lastname of the user
-     */
-    public String getLastname() {
-        return lastname;
     }
     /**
      getter
@@ -88,27 +79,6 @@ public class User {
      */
     public String getPassword() {
         return password;
-    }
-    /**
-     getter
-     * @return birthDate of the user
-     */
-    public LocalDate getBirthDate() {
-        return birthDate;
-    }
-    /**
-     getter
-     * @return registryDate of the user
-     */
-    public LocalDate getRegistryDate() {
-        return registryDate;
-    }
-    /**
-     getter
-     * @return bio of the user
-     */
-    public String getBio() {
-        return bio;
     }
     /**
      * getter

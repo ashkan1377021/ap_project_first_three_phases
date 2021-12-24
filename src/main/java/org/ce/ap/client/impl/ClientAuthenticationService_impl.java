@@ -13,6 +13,8 @@ import java.security.NoSuchAlgorithmException;
  * @version version 1 of ClientAuthenticationService implementation
  */
 public class ClientAuthenticationService_impl implements ClientAuthenticationService {
+    // a socket
+    Socket client;
     //an object of usefulMethods
     private usefulMethods usefulmethods;
     // an input stream
@@ -25,33 +27,35 @@ public class ClientAuthenticationService_impl implements ClientAuthenticationSer
     private String select;
     /**
      * creates a new  client authentication service
+     * @param client a socket
      */
-    public ClientAuthenticationService_impl(){
+    public ClientAuthenticationService_impl(Socket client)  {
+        this.client = client;
         act();
     }
    private void act() {
-         usefulmethods = new usefulMethods();
-        try (Socket client = new Socket("127.0.0.1", 7600)) {
-            out = client.getOutputStream();
-            in = client.getInputStream();
-            input = new Scanner(System.in);
-                System.out.println(usefulmethods.read_message(in));
-            do {
-                select = input.nextLine();
-            } while (!select.equals("1") && !select.equals("2") && !select.equals("3"));
-                usefulmethods.send_message(out, select);
-                if (select.equals("3")) {
-                    System.out.println(usefulmethods.read_message(in));
-                    System.exit(0);
-                }
-                else if (select.equals("1"))
-                    signUp();
+       try{
+       usefulmethods = new usefulMethods();
+       out = client.getOutputStream();
+       in = client.getInputStream();
+       input = new Scanner(System.in);
+       System.out.println(usefulmethods.read_message(in));
+       do {
+           select = input.nextLine();
+       } while (!select.equals("1") && !select.equals("2") && !select.equals("3"));
+       usefulmethods.send_message(out, select);
+       if (select.equals("3")) {
+           System.out.println(usefulmethods.read_message(in));
+           System.exit(0);
+       } else if (select.equals("1"))
+           signUp();
 
-                else
-                    signIn();
-            }catch (IOException ex) {
+       else
+           signIn();
+   }
+       catch (IOException ex){
            ex.printStackTrace();
-        }
+       }
         // For specifying wrong message digest algorithms
         catch (NoSuchAlgorithmException e) {
             System.out.println("Exception thrown for incorrect algorithm: " + e);

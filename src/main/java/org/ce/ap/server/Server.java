@@ -5,7 +5,6 @@ import java.net.*;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.*;
-import java.time.*;
 public class Server {
     public static void main(String[] args) {
         ArrayList<User> users = new ArrayList<>();
@@ -13,7 +12,7 @@ public class Server {
         int count = 0 ;
         try (ServerSocket welcomingSocket = new ServerSocket(7600)) {
             System.out.println("Server started");
-            while (count<3) {
+            while (count<5) {
                 Socket connectionSocket = welcomingSocket.accept();
                 System.out.println("client accepted!");
                 count++;
@@ -38,18 +37,35 @@ public class Server {
         @Override
         public void run() {
             try {
-                //AuthenticationService_impl authenticationService_impl;
-                //authenticationService_impl = new AuthenticationService_impl(users, clientNum, connectionSocket);
-               //int index = authenticationService_impl.getJ();
-                int index = 2;
-                //new TweetingService_impl(users,index,connectionSocket);
-                //new ObserverService_impl(users,index,connectionSocket);
-                new TimelineService_impl(users.get(index),connectionSocket);
-                Thread.sleep(5000);
-            }catch (InterruptedException e) {
+                InputStream in = connectionSocket.getInputStream();
+                OutputStream out = connectionSocket.getOutputStream();
+                usefulMethods usefulmethods = new usefulMethods();
+                String select;
+                AuthenticationService_impl authenticationService_impl;
+                authenticationService_impl = new AuthenticationService_impl(users, clientNum, connectionSocket);
+                int index = authenticationService_impl.getJ();
+                if(index >= 0)
+                    while (true) {
+                        select = usefulmethods.read_message(in);
+                        if (select.equals("1"))
+                            new TweetingService_impl(users,index,connectionSocket);
+                       else if(select.equals("2"))
+                            new ObserverService_impl(users,index,connectionSocket);
+                       else if(select.equals("3"))
+                             new TimelineService_impl(users.get(index),connectionSocket);
+                       else if(select.equals("4")){
+                            usefulmethods.showUsersDetails(users,index,out);
+                        }
+                       else{
+                            usefulmethods.send_message(out,"Goodbye.coming back soon");
+                            System.out.println( users.get(index).getUsername()+ " Quited");
+                            connectionSocket.close();
+                            break;
+                        }
+                    }
+            }catch (InterruptedException | IOException e) {
                 e.printStackTrace();
             }
-
                }
         }
 

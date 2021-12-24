@@ -6,13 +6,14 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.Socket;
 import java.util.Scanner;
-
 /**
  * this class has Methods that a user can observe its favorite users Tweets with their likes and reTweets
  * @author ashkan_mogharab
  * @version version 1 of ClientTimelineService implementation
  */
 public class ClientTimelineService_impl implements ClientTimelineService {
+    // a socket
+    Socket client;
     //an object of usefulMethods
     private usefulMethods usefulmethods;
     // an input stream
@@ -26,14 +27,16 @@ public class ClientTimelineService_impl implements ClientTimelineService {
 
     /**
      * creates a new client timeline service
+     * @param client a socket
      */
-    public ClientTimelineService_impl() {
+    public ClientTimelineService_impl(Socket client) {
+        this.client = client;
         act();
     }
 
     private void act() {
         usefulmethods = new usefulMethods();
-        try (Socket client = new Socket("127.0.0.1", 7600)) {
+        try  {
             out = client.getOutputStream();
             in = client.getInputStream();
             while (true) {

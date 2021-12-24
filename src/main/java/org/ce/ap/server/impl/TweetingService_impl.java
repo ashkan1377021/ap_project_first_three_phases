@@ -191,6 +191,8 @@ public class TweetingService_impl implements TweetingService {
                     if (is_valid_index(index, ix)) {
                         usefulmethods.send_message(out,"true");
                         System.out.println("the tweet(" +users.get(index).getTweets().get(ix).getText()+") removed by " +users.get(index).getUsername());
+                        if(!(users.get(index).getTweets().get(ix).getSender().equals(users.get(index))))
+                        users.get(index).getTweets().get(ix).getRetweets().remove(users.get(index));
                         users.get(index).getTweets().remove(ix);
                         usefulmethods.send_message(out,"the Tweet removed from your Tweets");
                       Thread.sleep(1);

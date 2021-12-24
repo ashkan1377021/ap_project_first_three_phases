@@ -12,6 +12,8 @@ import java.util.Scanner;
  *  @version version 1 of ClientTweetingService implementation
  */
 public class ClientTweetingService_impl implements ClientTweetingService {
+    // a socket
+    Socket client;
     //an object of usefulMethods
     private usefulMethods usefulmethods;
     // an input stream
@@ -24,13 +26,15 @@ public class ClientTweetingService_impl implements ClientTweetingService {
     private final Scanner input = new Scanner(System.in);
     /**
      * creates a new client tweeting service
+     * @param client a socket
      */
-    public ClientTweetingService_impl(){
+    public ClientTweetingService_impl( Socket client){
+        this.client = client;
         act();
     }
     private void act() {
         usefulmethods = new usefulMethods();
-        try (Socket client = new Socket("127.0.0.1", 7600)) {
+        try  {
             out = client.getOutputStream();
             in = client.getInputStream();
             label:

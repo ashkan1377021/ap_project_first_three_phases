@@ -121,4 +121,43 @@ public class usefulMethods{
         select = input.nextLine();
         send_message(out, select);
     }
+
+    /**
+     * this method shows users and tweets/retweets & likes of them
+     * @param users users of the server
+     * @param index index of the user who wants to observe information
+     * @param out an output stream
+     */
+    public void showUsersDetails(ArrayList<User> users , int index , OutputStream out) throws InterruptedException {
+        System.out.println("process of observe details of users by " + users.get(index).getUsername()+" started");
+        int count = users.size();
+        for(User user : users)
+            count+= user.getTweets().size() + user.getLiked().size();
+        send_message(out,"" + count);
+        Thread.sleep(1);
+        for (User user : users) {
+            send_message(out,user.getUsername());
+            Thread.sleep(1);
+            ArrayList<Tweet> tweets = user.getTweets();
+            int count1 = 1;
+            int count2 = 1;
+            tweets.sort(new Sort_by_sendTime());
+            for (Tweet tweet : tweets) {
+                if (tweet.getSender().equals(user))
+                   send_message(out, "Tweet " + (count1++) + " : text: " + tweet.getText() + "  sendTime: " + tweet.getSendDate() + "  " + tweet.getLikes().size() + " likes  " + tweet.getRetweets().size() + " retweets");
+                else
+                    send_message(out,"reTweet " + (count2++) + ": Sender: " + tweet.getSender().getUsername() + " : text: " + tweet.getText() + "  sendTime: " + tweet.getSendDate() + "  " + tweet.getLikes().size() + " likes  " + tweet.getRetweets().size() + " retweets");
+                Thread.sleep(1);
+            }
+            ArrayList<Tweet> liked_tweets = user.getLiked();
+            liked_tweets.sort(new Sort_by_sendTime());
+            for (Tweet liked_tweet : liked_tweets) {
+                send_message(out,"liked by " + user.getUsername() + '\n' + "Sender: " + liked_tweet.getSender().getUsername() + " text: " + liked_tweet.getText() + " SendTime: " + liked_tweet.getSendDate() + " " + liked_tweet.getLikes().size() + " likes " + liked_tweet.getRetweets().size() + " retweets");
+                Thread.sleep(1);
+            }
+            System.out.println('\n');
+
+        }
+        System.out.println("process of observe details of users by " + users.get(index).getUsername()+" ended");
+    }
 }

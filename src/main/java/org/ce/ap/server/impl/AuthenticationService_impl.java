@@ -25,7 +25,7 @@ import java.util.Scanner;
     //an object of usefulMethods
     private final usefulMethods usefulmethods = new usefulMethods();
     //index of user who signs in or signs up
-    private int j;
+    private int j = -1;
     //users of ServerSide
     private final ArrayList<User> users;
 
@@ -57,7 +57,7 @@ import java.util.Scanner;
                     signIn();
             else{
                 usefulmethods.send_message(out,"Goodbye.coming back soon");
-                System.out.println("client 1 Quited");
+                System.out.println("client" + clientNum + " Quited");
                 connectionSocket.close();
 
             }

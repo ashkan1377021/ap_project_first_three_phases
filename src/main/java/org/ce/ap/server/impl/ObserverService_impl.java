@@ -141,8 +141,8 @@ public class ObserverService_impl implements ObserverService {
                         System.out.println(users.get(index).getUsername() + " wants to unfollow " + (ix1 + 1) + "th of its favorite users");
                         if (ix1 < users.get(index).getFavoriteUsers().size()) {
                             usefulmethods.send_message(out, "true");
-                            users.get(index).getFavoriteUsers().remove(users.get(ix1));
-                            users.get(ix1).getFollowers().remove(users.get(index));
+                            users.get(index).getFavoriteUsers().get(ix1).getFollowers().remove(users.get(index));
+                            users.get(index).getFavoriteUsers().remove(ix1);
                             System.out.println("unfollow a user process by " + users.get(index).getUsername() + " successfully done");
                             usefulmethods.send_message(out, "unfollow this user successfully done");
                             Thread.sleep(1);
