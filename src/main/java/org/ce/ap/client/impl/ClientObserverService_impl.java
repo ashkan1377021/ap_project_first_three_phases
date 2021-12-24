@@ -84,9 +84,7 @@ import java.util.Scanner;
                 int count  = Integer.parseInt(usefulmethods.read_message(in));
                 int i = 0 ;
                 while(i!=count){
-                    System.out.println("started");
                     System.out.println(usefulmethods.read_message(in));
-                    System.out.println("ended");
                     i++;
                 }
             }

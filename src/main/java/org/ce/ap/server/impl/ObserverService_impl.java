@@ -170,7 +170,7 @@ public class ObserverService_impl implements ObserverService {
     private void observe() throws InterruptedException {
         while (true) {
             usefulmethods.send_message(out, "1:observe" + '\n' + "2:back");
-            System.out.println("process of observe favorite users " + users.get(index).getUsername() + "  started");
+            System.out.println("process of observe favorite users Tweets by " + users.get(index).getUsername() + "  started");
             select = usefulmethods.read_message(in);
             if (select.equals("1")) {
             int count = 0 ;
@@ -189,7 +189,7 @@ public class ObserverService_impl implements ObserverService {
                         usefulmethods.send_message(out,"Tweet " + (count1++) + " : text: " +tweet.getText() + "  sendTime: " +tweet.getSendDate() + "  " + tweet.getLikes().size() + " likes" + "  " + tweet.getRetweets().size() + " retweets");
                         Thread.sleep(1);
                     }
-
+                System.out.println("process of observe favorite users Tweets by " + users.get(index).getUsername() + "  ended");
             }
             else {
                 System.out.println(users.get(index).getUsername() + " backed to observer service menu");

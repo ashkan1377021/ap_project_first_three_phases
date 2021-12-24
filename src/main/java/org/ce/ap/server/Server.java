@@ -9,12 +9,6 @@ import java.time.*;
 public class Server {
     public static void main(String[] args) {
         ArrayList<User> users = new ArrayList<>();
-        User user1 = new User("hossein", "karimi", "hossein1998", "hossein231998", LocalDate.of(1998, 12, 28), LocalDate.now(), "Hello World");
-        Tweet tweet1 = new Tweet(user1,"Today is Saturday",java.time.LocalDateTime.now());
-        user1.getTweets().add(tweet1);
-        User user2 = new User("ali", "karimi", "ali1998", "ali231998", LocalDate.of(1998, 12, 28), LocalDate.now(), "Hello World");
-        users.add(user1);
-        users.add(user2);
         ExecutorService pool = Executors.newCachedThreadPool();
         int count = 0 ;
         try (ServerSocket welcomingSocket = new ServerSocket(7600)) {
@@ -47,10 +41,10 @@ public class Server {
                 //AuthenticationService_impl authenticationService_impl;
                 //authenticationService_impl = new AuthenticationService_impl(users, clientNum, connectionSocket);
                //int index = authenticationService_impl.getJ();
-                int index = 1;
+                int index = 2;
                 //new TweetingService_impl(users,index,connectionSocket);
                 //new ObserverService_impl(users,index,connectionSocket);
-
+                new TimelineService_impl(users.get(index),connectionSocket);
                 Thread.sleep(5000);
             }catch (InterruptedException e) {
                 e.printStackTrace();
