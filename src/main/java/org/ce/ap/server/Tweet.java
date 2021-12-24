@@ -7,15 +7,15 @@ import java.util.ArrayList;
  */
 public class Tweet {
     //sender of the tweet
-    private User sender;
+    private final User sender;
     //users who liked  the tweet
-    private ArrayList<User>likes;
+    private final ArrayList<User>likes;
     // users who retweeted the tweet
-    private ArrayList<User>retweets;
+    private final ArrayList<User>retweets;
     //text of the tweet that its maximum length is 256
-    private String text;
+    private final String text;
     // send time of the tweet
-    private LocalDateTime sendTime;
+    private final LocalDateTime sendTime;
     /**
      * creates a new tweet
      * @param sender sender of the tweet
@@ -70,10 +70,8 @@ public class Tweet {
     public String toString() {
         ArrayList<String>liked_usernames = new ArrayList<>();
         ArrayList<String>retweeted_usernames = new ArrayList<>();
-        for(int i = 0 ; i<likes.size();i++)
-            liked_usernames.add(likes.get(i).getUsername());
-        for(int i = 0 ; i<retweets.size();i++)
-            retweeted_usernames.add(retweets.get(i).getUsername());
+        for (User like : likes) liked_usernames.add(like.getUsername());
+        for (User retweet : retweets) retweeted_usernames.add(retweet.getUsername());
         return "text=" + text + ",   " +
                 "likes=" + liked_usernames.size()+",  "+
                 "reTweets=" + retweeted_usernames.size()+",    "+

@@ -2,14 +2,11 @@ package main.java.org.ce.ap.server;
 import java.time.*;
 import java.util.ArrayList;
 import java.security.NoSuchAlgorithmException;
-// Java program to calculate SHA hash value
 /**
- * this class holds details of an user in ServerSide
+ * this class holds details of a user in ServerSide
  * @author ashkan_mogharab
  */
 public class User {
-    //an object of usefulMethods
-    private usefulMethods usefulmethods = new usefulMethods();
     //firstname of the user
     private String firstname;
     //lastname of the user
@@ -20,8 +17,8 @@ public class User {
     private String password;
     //birthDate of the user
     private LocalDate birthDate;
-    //registeryDate of the user
-    private LocalDate registeryDate;
+    //registry Date of the user
+    private LocalDate registryDate;
     //bio of the user that its  maximum length is 256
     private String bio ;
     //tweets of the user
@@ -39,17 +36,19 @@ public class User {
      * @param username username of the user
      * @param password password of the user
      * @param birthDate birthDate of the user
-     * @param registeryDate registeryDate of the user
+     * @param registryDate registryDate of the user
      * @param bio bio of the user
      */
-    public User(String firstname, String lastname, String username, String password, LocalDate birthDate, LocalDate registeryDate, String bio) {
+    public User(String firstname, String lastname, String username, String password, LocalDate birthDate, LocalDate registryDate, String bio) {
         try {
             this.firstname = firstname;
             this.lastname = lastname;
             this.username = username;
-            this.password =usefulmethods.toHexString(usefulmethods.getSHA(password));
+            //an object of usefulMethods
+            usefulMethods usefulmethods = new usefulMethods();
+            this.password = usefulmethods.toHexString(usefulmethods.getSHA(password));
             this.birthDate = birthDate;
-            this.registeryDate = registeryDate;
+            this.registryDate = registryDate;
             this.bio = bio;
             tweets = new ArrayList<>();
             followers = new ArrayList<>();
@@ -99,10 +98,10 @@ public class User {
     }
     /**
      getter
-     * @return registeryDate of the user
+     * @return registryDate of the user
      */
-    public LocalDate getRegisteryDate() {
-        return registeryDate;
+    public LocalDate getRegistryDate() {
+        return registryDate;
     }
     /**
      getter
@@ -149,7 +148,7 @@ public class User {
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
                 ", birthDate=" + birthDate +
-                ", registeryDate=" + registeryDate +
+                ", registryDate=" + registryDate +
                 ", bio='" + bio + '\'' +
                 ", tweets=" + tweets.size() +
                 ", followers=" + followers.size()+'\''+

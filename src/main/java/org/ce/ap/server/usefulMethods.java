@@ -8,10 +8,15 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.*;
 /**
- * this class in Run method converts password to hexstring
+ * this class has some useful methods
  * @author ashkan_mogharab
  */
 public class usefulMethods{
+    /**
+     * this method hashes a string to an array of bytes
+     * @param input an string
+     * @return hash of the string
+     */
     public  byte[] getSHA(String input) throws NoSuchAlgorithmException
     {
         // Static getInstance method is called with hashing SHA
@@ -24,8 +29,8 @@ public class usefulMethods{
     }
     /**
      *
-     * @param hash input of Run method with array of bytes form
-     * @return hexstring of password
+     * @param hash input of toHexString method with array of bytes form
+     * @return hex string of password
      */
     public  String toHexString(byte[] hash)
     {
@@ -44,7 +49,7 @@ public class usefulMethods{
         return hexString.toString();
     }
     /**
-     * this method checks that person wants to continue attempting or back to main menu
+     * this method checks that person wants to continue attempting or not
      */
     public String continue_or_not(){
         String sel ="-1";
@@ -65,7 +70,7 @@ public class usefulMethods{
             out.write(string.getBytes());
         }
         catch(IOException ex){
-            System.out.println(ex);
+           ex.printStackTrace();
         }
     }
 
@@ -83,8 +88,37 @@ public class usefulMethods{
              message = new String(buffer,0,read);
         }
         catch(IOException ex){
-            System.out.println(ex);
+           ex.printStackTrace();
         }
         return message;
+    }
+    /**
+     * run a few statement that are duplicate in main code
+     */
+    public String run_few_statement2( OutputStream out, InputStream in, String select, Scanner input) {
+        while (true) {
+            System.out.println(read_message(in));
+            select = input.nextLine();
+            send_message(out, select);
+            if (read_message(in).equals("true")) {
+                select = "-1";
+                break;
+            }
+            else {
+                System.out.println( read_message(in));
+                select = continue_or_not();
+                send_message(out, select);
+                if (select.equals("2")) {
+                    break;
+                }
+            }
+        }
+        return select;
+    }
+
+     public void run_few_statement1( OutputStream out, InputStream in, String select, Scanner input) {
+        System.out.println(read_message(in));
+        select = input.nextLine();
+        send_message(out, select);
     }
 }

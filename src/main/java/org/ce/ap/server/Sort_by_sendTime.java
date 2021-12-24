@@ -1,6 +1,5 @@
 package main.java.org.ce.ap.server;
 import java.util.*;
-import java.util.*;
 /**
  * this class with compare method,Sorts tweets in ascending order by sendTime
  */

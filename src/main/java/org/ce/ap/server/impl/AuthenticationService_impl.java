@@ -1,6 +1,5 @@
 package main.java.org.ce.ap.server.impl;
 import main.java.org.ce.ap.server.*;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -14,28 +13,26 @@ import java.util.Scanner;
  * @version version 1 of AuthenticationService implementation
  */
 
-    public class AuthenticationServicelmpl implements AuthenticationService {
+    public class AuthenticationService_impl implements AuthenticationService {
         //a socket for connecting  to user
-        Socket connectionSocket;
+        private final Socket connectionSocket;
         // an input stream
-        InputStream in ;
+        private InputStream in ;
         // an output stream
-        OutputStream out ;
-        //an array of bytes
-        byte[] buffer = new byte[2048];
+        private OutputStream out ;
         //client number
-    int clientNum;
+    private final int clientNum;
     //an object of usefulMethods
-    private usefulMethods usefulmethods = new usefulMethods();
+    private final usefulMethods usefulmethods = new usefulMethods();
     //index of user who signs in or signs up
     private int j;
     //users of ServerSide
-    private ArrayList<User> users;
+    private final ArrayList<User> users;
 
     /**
      * creates a new  authentication service
      */
-    public AuthenticationServicelmpl(ArrayList<User> users ,int clientNum ,Socket connectionSocket) {
+    public AuthenticationService_impl(ArrayList<User> users ,int clientNum ,Socket connectionSocket) {
         this.users = users;
         this.clientNum = clientNum;
         this.connectionSocket = connectionSocket;
@@ -66,7 +63,7 @@ import java.util.Scanner;
             }
         }
         catch(IOException ex){
-            System.out.println(ex);
+            ex.printStackTrace();
         }
     }
     /**
@@ -98,15 +95,15 @@ import java.util.Scanner;
                     break;
                 }
                 usefulmethods.send_message(out,"false");
-                System.out.println("The username that client" +clientNum +" entered is duplicate.we requsted from it to choose continue attempting or back");
+                System.out.println("The username that client" +clientNum +" entered is duplicate.we requested from it to choose continue attempting or back");
                 usefulmethods.send_message(out,("This username is duplicate" + "\n" + "1:continue attempting" + "\n" + "2: back"));
 
                 if ( usefulmethods.read_message(in) .equals("2")) {
-                    System.out.println("client" + clientNum + "choosed to back");
+                    System.out.println("client" + clientNum + "chose to back");
                     act();
                 }
                 else
-                    System.out.println("client" + clientNum + " choosed to continue attempting");
+                    System.out.println("client" + clientNum + " chose to continue attempting");
             }
             usefulmethods.send_message(out,"password :");
             password = usefulmethods.read_message(in);
@@ -117,25 +114,25 @@ import java.util.Scanner;
             int day = 0;
             int flag = 0;
             year = Integer.parseInt(usefulmethods.read_message(in));
-            System.out.println("birthyear of client" +clientNum +" is:" +year);
+            System.out.println("birth_year of client" +clientNum +" is:" +year);
             while (flag == 0) {
                 usefulmethods.send_message(out,"month :");
                 month = Integer.parseInt(usefulmethods.read_message(in));
                 if (month > 12) {
                     usefulmethods.send_message(out,"false");
-                    System.out.println("The month that client" +clientNum +" entered is invalid.we requsted from it to choose continue attempting or back");
+                    System.out.println("The month that client" +clientNum +" entered is invalid.we requested from it to choose continue attempting or back");
                     usefulmethods.send_message(out,("invalid month" + "\n" + "1:continue attempting" + "\n" + "2: back"));
                     if ( usefulmethods.read_message(in) .equals("2")) {
-                        System.out.println("client" + clientNum + " choosed to back");
+                        System.out.println("client" + clientNum + " chose to back");
                         act();
                     }
                     else
-                        System.out.println("client" + clientNum + " choosed to continue attempting");
+                        System.out.println("client" + clientNum + " chose to continue attempting");
 
                 } else {
                     flag = 1;
                     usefulmethods.send_message(out,"true");
-                    System.out.println("birthmonth of client" + clientNum + " is:" + month);
+                    System.out.println("birth_month of client" + clientNum + " is:" + month);
                 }
             }
             flag = 0;
@@ -144,14 +141,14 @@ import java.util.Scanner;
                 day = Integer.parseInt(usefulmethods.read_message(in));
                 if(day > 30){
                     usefulmethods.send_message(out,"false");
-                    System.out.println("The day that client" +clientNum +" entered is invalid.we requsted from it to choose continue attempting or back");
+                    System.out.println("The day that client" +clientNum +" entered is invalid.we requested from it to choose continue attempting or back");
                     usefulmethods.send_message(out,("invalid day" + "\n" + "1:continue attempting" + "\n" + "2: back"));
                     if ( usefulmethods.read_message(in) .equals("2")) {
-                        System.out.println("client" + clientNum + " choosed to back");
+                        System.out.println("client" + clientNum + " chose to back");
                         act();
                     }
                     else
-                        System.out.println("client" + clientNum + " choosed to continue attempting");
+                        System.out.println("client" + clientNum + " chose to continue attempting");
 
                 } else {
                     flag = 1;
@@ -169,14 +166,14 @@ import java.util.Scanner;
                     break;
                 }
                 usefulmethods.send_message(out,"false");
-                System.out.println("The String that client"+ clientNum + " entered is very long .maximum valid length is 256. we requsted from it to choose continue attempting or back");
+                System.out.println("The String that client"+ clientNum + " entered is very long .maximum valid length is 256. we requested from it to choose continue attempting or back");
                 usefulmethods.send_message(out,("long String(maximum length is 256)" + "\n" + "1:continue attempting" + "\n" + "2: back"));
                 if ( usefulmethods.read_message(in) .equals("2")) {
-                    System.out.println("client" + clientNum + " choosed to back");
+                    System.out.println("client" + clientNum + " chose to back");
                     act();
                 }
                 else
-                    System.out.println("client" + clientNum + " choosed to continue attempting");
+                    System.out.println("client" + clientNum + " chose to continue attempting");
             }
             User user = new User(firstname, lastname, username, password, birthDate, LocalDate.now(), bio);
             users.add(user);
@@ -218,26 +215,26 @@ import java.util.Scanner;
                             j = i;
                         } else {
                             usefulmethods.send_message(out,"false");
-                            System.out.println("The password that client"+ clientNum + " entered (" + password +") was incorrect . we requsted from it to choose continue attempting or back");
+                            System.out.println("The password that client"+ clientNum + " entered (" + password +") was incorrect . we requested from it to choose continue attempting or back");
                             usefulmethods.send_message(out,"incorrect password!"+ "\n" + "1:continue attempting" + "\n" + "2: back");
                             if ( usefulmethods.read_message(in) .equals("2")) {
-                                System.out.println("client" + clientNum + " choosed to back");
+                                System.out.println("client" + clientNum + " chose to back");
                                 act();
                             }
                             else
-                                System.out.println("client" + clientNum + " choosed to continue attempting");
+                                System.out.println("client" + clientNum + " chose to continue attempting");
                         }
                 }
             } else {
                 usefulmethods.send_message(out,"false");
-                System.out.println("The username that client"+ clientNum + " entered (" +username + ") was not in system . we requsted from it to choose continue attempting or back");
+                System.out.println("The username that client"+ clientNum + " entered (" +username + ") was not in system . we requested from it to choose continue attempting or back");
                usefulmethods.send_message(out,"There is no user with this username"+ "\n" + "1:continue attempting" + "\n" + "2: back");
                 if ( usefulmethods.read_message(in) .equals("2")) {
-                    System.out.println("client" + clientNum + " choosed to back");
+                    System.out.println("client" + clientNum + " chose to back");
                     act();
                 }
                 else
-                    System.out.println("client" + clientNum + " choosed to continue attempting");
+                    System.out.println("client" + clientNum + " chose to continue attempting");
             }
         }
     }
@@ -249,8 +246,8 @@ import java.util.Scanner;
      * @return true if it not be duplicate otherwise false
      */
     private boolean username_is_valid(String username) {
-        for (int i = 0; i < users.size(); i++)
-            if (users.get(i).getUsername().equals(username))
+        for (User user : users)
+            if (user.getUsername().equals(username))
                 return false;
         return true;
     }
