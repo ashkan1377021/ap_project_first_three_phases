@@ -1,11 +1,12 @@
 package main.java.org.ce.ap.server;
+import java.io.Serializable;
 import java.time.*;
 import java.util.ArrayList;
 /**
  * this class holds details of a tweet
  * @author ashkan_mogharab
  */
-public class Tweet {
+public class Tweet implements Serializable {
     //sender of the tweet
     private final User sender;
     //users who liked  the tweet

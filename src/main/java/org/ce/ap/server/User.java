@@ -1,4 +1,5 @@
 package main.java.org.ce.ap.server;
+import java.io.Serializable;
 import java.time.*;
 import java.util.ArrayList;
 import java.security.NoSuchAlgorithmException;
@@ -6,7 +7,7 @@ import java.security.NoSuchAlgorithmException;
  * this class holds details of a user in ServerSide
  * @author ashkan_mogharab
  */
-public class User {
+public class User implements Serializable {
     //firstname of the user
     private String firstname;
     //lastname of the user

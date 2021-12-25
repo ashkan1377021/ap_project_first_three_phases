@@ -11,6 +11,8 @@ import java.util.ArrayList;
  * @version version 1 of TimelineService implementation
  */
 public class TimelineService_impl implements TimelineService {
+    // an object of File_utility
+    File_utility file_utility = new File_utility();
     //a socket for connecting  to user
     private final Socket connectionSocket;
     // an output stream

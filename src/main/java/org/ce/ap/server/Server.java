@@ -8,13 +8,16 @@ import java.util.*;
 public class Server {
     public static void main(String[] args) {
         ArrayList<User> users = new ArrayList<>();
+        File_utility file_utility = new File_utility();
         ExecutorService pool = Executors.newCachedThreadPool();
         int count = 0 ;
         try (ServerSocket welcomingSocket = new ServerSocket(7600)) {
             System.out.println("Server started");
-            while (count<5) {
+            file_utility.record_events("Server started");
+            while (true) {
                 Socket connectionSocket = welcomingSocket.accept();
                 System.out.println("client accepted!");
+                file_utility.record_events("client accepted!");
                 count++;
                 pool.execute(new ClientHandler(connectionSocket, users, count));
             }
@@ -40,6 +43,7 @@ public class Server {
                 InputStream in = connectionSocket.getInputStream();
                 OutputStream out = connectionSocket.getOutputStream();
                 usefulMethods usefulmethods = new usefulMethods();
+                File_utility file_utility = new File_utility();
                 String select;
                 AuthenticationService_impl authenticationService_impl;
                 authenticationService_impl = new AuthenticationService_impl(users, clientNum, connectionSocket);
@@ -59,6 +63,7 @@ public class Server {
                        else{
                             usefulmethods.send_message(out,"Goodbye.coming back soon");
                             System.out.println( users.get(index).getUsername()+ " Quited");
+                            file_utility.record_events(users.get(index).getUsername()+ " Quited");
                             connectionSocket.close();
                             break;
                         }
