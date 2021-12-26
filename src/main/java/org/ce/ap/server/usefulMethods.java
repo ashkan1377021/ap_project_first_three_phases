@@ -12,6 +12,8 @@ import java.util.*;
  * @author ashkan_mogharab
  */
 public class usefulMethods{
+    // an object of File_utility
+    private final File_utility file_utility = new File_utility();
     /**
      * this method hashes a string to an array of bytes
      * @param input an string
@@ -92,8 +94,14 @@ public class usefulMethods{
         }
         return message;
     }
+
     /**
-     * run a few statement that are duplicate in main code
+     *  run a few statement that are duplicate in main code
+     * @param out an output stream
+     * @param in an input stream
+     * @param select a simple string for use
+     * @param input a scanner for use
+     * @return a string
      */
     public String run_few_statement2( OutputStream out, InputStream in, String select, Scanner input) {
         while (true) {
@@ -130,18 +138,19 @@ public class usefulMethods{
      */
     public void showUsersDetails(ArrayList<User> users , int index , OutputStream out) throws InterruptedException {
         System.out.println("process of observe details of users by " + users.get(index).getUsername()+" started");
-        int count = users.size();
+        file_utility.record_events("process of observe details of users by " + users.get(index).getUsername()+" started");
+        int count = users.size()*2;
         for(User user : users)
             count+= user.getTweets().size() + user.getLiked().size();
         send_message(out,"" + count);
         Thread.sleep(1);
         for (User user : users) {
-            send_message(out,user.getUsername());
+            send_message(out,user.getUsername() + "  followers :"  + user.getFollowers().size() + "  following :" + user.getFavoriteUsers().size());
             Thread.sleep(1);
             ArrayList<Tweet> tweets = user.getTweets();
             int count1 = 1;
             int count2 = 1;
-            tweets.sort(new Sort_by_sendTime());
+            file_utility.make_changes(users);
             for (Tweet tweet : tweets) {
                 if (tweet.getSender().equals(user))
                    send_message(out, "Tweet " + (count1++) + " : text: " + tweet.getText() + "  sendTime: " + tweet.getSendDate() + "  " + tweet.getLikes().size() + " likes  " + tweet.getRetweets().size() + " retweets");
@@ -150,14 +159,75 @@ public class usefulMethods{
                 Thread.sleep(1);
             }
             ArrayList<Tweet> liked_tweets = user.getLiked();
-            liked_tweets.sort(new Sort_by_sendTime());
+            file_utility.make_changes(users);
             for (Tweet liked_tweet : liked_tweets) {
                 send_message(out,"liked by " + user.getUsername() + '\n' + "Sender: " + liked_tweet.getSender().getUsername() + " text: " + liked_tweet.getText() + " SendTime: " + liked_tweet.getSendDate() + " " + liked_tweet.getLikes().size() + " likes " + liked_tweet.getRetweets().size() + " retweets");
                 Thread.sleep(1);
             }
-            System.out.println('\n');
+            send_message(out,"" + '\n');
+            Thread.sleep(1);
 
         }
         System.out.println("process of observe details of users by " + users.get(index).getUsername()+" ended");
+        file_utility.record_events("process of observe details of users by " + users.get(index).getUsername()+" ended");
+    }
+
+    /**
+     * this method Syncs users that read from database
+     * @param users users of the server
+     */
+    public void sync(ArrayList<User> users) {
+        for (User uSer : users) {
+            for (Tweet tweet : uSer.getTweets())
+                if (tweet.getSender().getUsername().equals(uSer.getUsername())) {
+                    for (User user : users)
+                        for (int i = 0; i < user.getTweets().size(); i++) {
+                            if (equal(user.getTweets().get(i),tweet) && !(user.getUsername().equals(uSer.getUsername()))) {
+                                user.getTweets().set(i, tweet);
+                                for (int j = 0; j < tweet.getRetweets().size(); j++)
+                                    if (tweet.getRetweets().get(j).getUsername().equals(user.getUsername())) {
+                                        tweet.getRetweets().set(j, user);
+                                        break;
+                                    }
+                                break;
+                            }
+                        }
+                    for (User user : users)
+                        for (int i = 0; i < user.getLiked().size(); i++) {
+                            if (equal(user.getLiked().get(i),tweet)) {
+                                user.getLiked().set(i, tweet);
+                                for (int j = 0; j < tweet.getLikes().size(); j++)
+                                    if (tweet.getLikes().get(j).getUsername().equals(user.getUsername())) {
+                                        tweet.getLikes().set(j, user);
+                                        break;
+                                    }
+                                break;
+                            }
+                        }
+                }
+            for (User user : users)
+                for (int i = 0; i < user.getFollowers().size(); i++)
+                    if (user.getFollowers().get(i).getUsername().equals(uSer.getUsername())) {
+                        user.getFollowers().set(i, uSer);
+                        for (int j = 0; j < uSer.getFavoriteUsers().size(); j++)
+                            if (uSer.getFavoriteUsers().get(j).getUsername().equals(user.getUsername())) {
+                                uSer.getFavoriteUsers().set(j, user);
+                                break;
+                            }
+                        break;
+                    }
+
+
+        }
+    }
+
+    /**
+     * this method checks that two tweets are equal or not
+     * @param tweet1 a tweet
+     * @param tweet2 another tweet
+     * @return returns true if they be equal else returns false
+     */
+    private boolean equal(Tweet tweet1 , Tweet tweet2){
+        return(tweet1.getSender().getUsername().equals(tweet2.getSender().getUsername()) && tweet1.getText().equals(tweet2.getText()) && tweet1.getSendDate().isEqual(tweet2.getSendDate()));
     }
 }

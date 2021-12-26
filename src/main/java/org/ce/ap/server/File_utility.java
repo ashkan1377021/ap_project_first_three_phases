@@ -8,9 +8,10 @@ import java.util.*;
 public class File_utility {
     /**
      * this method reads users from database
-     * @param users an ArrayList that will be fill
+     * @return users of server
      */
-    public void read_users(ArrayList<User>users) {
+    public ArrayList<User>read_users() {
+        ArrayList<User> users = new ArrayList<>();
         try{
             FileReader fileReader= new FileReader("C:\\Users\\ashkan 1377\\IdeaProjects\\AP-Project-ashkan_mogharab-9823081\\Twitter\\files\\model\\users\\names.txt");
             Scanner sc = new Scanner(fileReader);
@@ -23,11 +24,20 @@ public class File_utility {
                 objectInputStream.close();
             }
             sc.close();
-
+              return users;
         }
         catch(IOException | ClassNotFoundException ex){
             ex.printStackTrace();
         }
+        return users;
+    }
+    /**
+     * this method make changes in details of server's users
+     * @param users an ArrayList that will change
+     */
+    public void make_changes(ArrayList<User>users) {
+     for(User user : users)
+         edit_user(user);
     }
     /**
      * this method adds a user to server's users
@@ -50,7 +60,7 @@ public class File_utility {
      * this method edits information of a user
      * @param user a user
      */
-    public void edit_user(User user){
+    private void edit_user(User user){
         String st = user.getUsername();
         try(FileOutputStream fileOutputStream = new FileOutputStream("C:\\Users\\ashkan 1377\\IdeaProjects\\AP-Project-ashkan_mogharab-9823081\\Twitter\\files\\model\\users\\" +st +".txt");
             ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream)){
@@ -62,6 +72,7 @@ public class File_utility {
     }
     /**
      * this method record events in server
+     * @param st a string that describes an event
      */
     public void record_events(String st)  {
         try( FileWriter fileWriter = new FileWriter("C:\\Users\\ashkan 1377\\IdeaProjects\\AP-Project-ashkan_mogharab-9823081\\Twitter\\files\\log\\log.txt",true)){
@@ -69,34 +80,6 @@ public class File_utility {
             fileWriter.write(st);
         }
         catch (IOException ex){
-            ex.printStackTrace();
-        }
-    }
-    /**
-     * this method create a tweet in C:\Users\ashkan 1377\IdeaProjects\AP-Project-ashkan_mogharab-9823081\Twitter\files\model\tweets
-     * @param tweet a tweet which wants to be added
-     */
-    public void add_tweet(Tweet tweet){
-        String st = tweet.getSender().getUsername() ;
-        try(FileOutputStream fileOutputStream = new FileOutputStream("C:\\Users\\ashkan 1377\\IdeaProjects\\AP-Project-ashkan_mogharab-9823081\\Twitter\\files\\model\\tweets\\" +st +".txt");
-            ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream)){
-            objectOutputStream.writeObject(tweet);
-        }
-        catch(IOException ex){
-            ex.printStackTrace();
-        }
-    }
-
-    /**
-     * this method edits information of a tweet
-     * @param tweet an edited tweet
-     */
-    public void edit_tweet(Tweet tweet){
-        String st = tweet.getSender().getUsername();
-        try(FileOutputStream fileOutputStream = new FileOutputStream("C:\\Users\\ashkan 1377\\IdeaProjects\\AP-Project-ashkan_mogharab-9823081\\Twitter\\files\\model\\tweets\\" +st +".txt");
-            ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream)){
-            objectOutputStream.writeObject(tweet);
-        } catch (IOException ex) {
             ex.printStackTrace();
         }
     }

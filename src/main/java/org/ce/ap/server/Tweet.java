@@ -66,7 +66,6 @@ public class Tweet implements Serializable {
     public LocalDateTime getSendDate() {
         return sendTime;
     }
-
     @Override
     public String toString() {
         ArrayList<String>liked_usernames = new ArrayList<>();

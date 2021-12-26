@@ -7,11 +7,14 @@ import java.util.concurrent.Executors;
 import java.util.*;
 public class Server {
     public static void main(String[] args) {
-        ArrayList<User> users = new ArrayList<>();
         File_utility file_utility = new File_utility();
+        usefulMethods usefulmethods = new usefulMethods();
+        ArrayList<User> users = file_utility.read_users();
+        usefulmethods.sync(users);
         ExecutorService pool = Executors.newCachedThreadPool();
         int count = 0 ;
-        try (ServerSocket welcomingSocket = new ServerSocket(7600)) {
+        try (ServerSocket welcomingSocket = new ServerSocket(7600);
+             FileWriter fileWriter = new FileWriter("C:\\Users\\ashkan 1377\\IdeaProjects\\AP-Project-ashkan_mogharab-9823081\\Twitter\\files\\log\\log.txt")){
             System.out.println("Server started");
             file_utility.record_events("Server started");
             while (true) {
@@ -56,7 +59,7 @@ public class Server {
                        else if(select.equals("2"))
                             new ObserverService_impl(users,index,connectionSocket);
                        else if(select.equals("3"))
-                             new TimelineService_impl(users.get(index),connectionSocket);
+                             new TimelineService_impl(users,index,connectionSocket);
                        else if(select.equals("4")){
                             usefulmethods.showUsersDetails(users,index,out);
                         }

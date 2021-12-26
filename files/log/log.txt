@@ -1,0 +1,217 @@
+Server started
+client accepted!
+welcoming message sent to client1
+client accepted!
+welcoming message sent to client2
+client accepted!
+welcoming message sent to client3
+receive from client1 : 2
+process of client1 sign in started
+The username that client1 entered (ashkan1998) was existed
+The password that client1 entered (10490592f4bdb7c833effa80b87a943551d9907129eb2e52a7f4aac1bcb47600) was correct and signed in its account
+receive from client2 : 2
+process of client2 sign in started
+The username that client2 entered (ali1998) was existed
+The password that client2 entered (60072a62362c6f524f6083f7ef0dbaa2552862fb4cc0c34c69e2805ddd171e6d) was correct and signed in its account
+receive from client3 : 2
+process of client3 sign in started
+The username that client3 entered (hossein1998) was existed
+The password that client3 entered (256e760e973ed04768a4a48b906f86f4de99ca6ab3695147ee23fccf6053c9cb) was correct and signed in its account
+welcoming message of Timeline service sent to ashkan1998
+receive from ashkan1998 : 1
+process of observe Timeline by ashkan1998  started
+process of observe Timeline by ashkan1998 ended
+process of observe Timeline by ashkan1998  started
+welcoming message of Tweeting service sent to ali1998
+receive from ali1998 : 1
+process of retweet a tweet by ali1998  started
+ali1998 wants to retweet from user 3
+ali1998 wants to retweet 1th tweet of user 3
+ali1998have already retweeted this tweet
+ali1998 backed to tweeting service menu
+welcoming message of Tweeting service sent to ali1998
+receive from ali1998 : 3
+process of like a tweet by ali1998  started
+ali1998 wants to like a tweet from user 3
+ali1998 wants to like 1th tweet of user 3
+ali1998have already liked this tweet
+process of like a tweet by ali1998  started
+ashkan1998 backed to Timeline service menu
+welcoming message of Timeline service sent to ashkan1998
+receive from ashkan1998 : 2
+ashkan1998 Quited from Timeline service
+welcoming message of observer service sent to ashkan1998
+receive from ashkan1998 : 1
+process of follow a user by ashkan1998  started
+received 1
+ashkan1998 wants to follow user 3
+ashkan1998 have already followed this user
+process of follow a user by ashkan1998  started
+ali1998 backed to tweeting service menu
+welcoming message of Tweeting service sent to ali1998
+received 2
+ashkan1998 backed to observer service menu
+welcoming message of observer service sent to ashkan1998
+receive from ashkan1998 : 4
+ashkan1998 Quited from observer service
+welcoming message of Tweeting service sent to ashkan1998
+receive from ashkan1998 : 3
+process of like a tweet by ashkan1998  started
+ashkan1998 wants to like a tweet from user 3
+ashkan1998 wants to like 1th tweet of user 3
+like a tweet process by ashkan1998 successfully done
+process of like a tweet by ashkan1998  started
+receive from ali1998 : 4
+ali1998 Quited from Tweeting service
+process of observe details of users by ali1998 started
+process of observe details of users by ali1998 ended
+welcoming message of Tweeting service sent to ali1998
+receive from ali1998 : 2
+process of remove a tweet by ali1998  started
+the tweet(Today is Sunday) removed by ali1998
+process of remove a tweet by ali1998  started
+ashkan1998 backed to tweeting service menu
+welcoming message of Tweeting service sent to ashkan1998
+receive from ashkan1998 : 4
+ashkan1998 Quited from Tweeting service
+process of observe details of users by ashkan1998 started
+process of observe details of users by ashkan1998 ended
+welcoming message of Timeline service sent to ashkan1998
+receive from ashkan1998 : 1
+process of observe Timeline by ashkan1998  started
+process of observe Timeline by ashkan1998 ended
+process of observe Timeline by ashkan1998  started
+welcoming message of Tweeting service sent to hossein1998
+receive from hossein1998 : 1
+process of add a tweet by hossein1998  started
+the Tweet (it is 6:45) created by hossein1998
+ashkan1998 backed to Timeline service menu
+welcoming message of Timeline service sent to ashkan1998
+receive from ashkan1998 : 1
+process of observe Timeline by ashkan1998  started
+process of observe Timeline by ashkan1998 ended
+process of observe Timeline by ashkan1998  started
+ashkan1998 backed to Timeline service menu
+welcoming message of Timeline service sent to ashkan1998
+receive from ashkan1998 : 2
+ashkan1998 Quited from Timeline service
+welcoming message of observer service sent to ashkan1998
+receive from ashkan1998 : 1
+process of follow a user by ashkan1998  started
+received 1
+ashkan1998 wants to follow user 2
+follow a user process by ashkan1998 successfully done
+process of follow a user by ashkan1998  started
+ali1998 backed to tweeting service menu
+welcoming message of Tweeting service sent to ali1998
+receive from ali1998 : 1
+process of retweet a tweet by ali1998  started
+ali1998 wants to retweet from user 3
+process of retweet a tweet by hossein1998  started
+hossein1998 wants to retweet from user 3
+hossein1998 wanted to retweet a tweet from itself.we requested from it to choose continue attempting or back
+ali1998 wants to retweet 2th tweet of user 3
+reTweeting process by ali1998 successfully done
+received 2
+ashkan1998 backed to observer service menu
+welcoming message of observer service sent to ashkan1998
+receive from ashkan1998 : 4
+ashkan1998 Quited from observer service
+welcoming message of Timeline service sent to ashkan1998
+receive from ashkan1998 : 1
+process of observe Timeline by ashkan1998  started
+process of observe Timeline by ashkan1998 ended
+process of observe Timeline by ashkan1998  started
+ashkan1998 backed to Timeline service menu
+welcoming message of Timeline service sent to ashkan1998
+receive from ashkan1998 : 2
+ashkan1998 Quited from Timeline service
+welcoming message of Tweeting service sent to ashkan1998
+receive from ashkan1998 : 1
+process of retweet a tweet by ashkan1998  started
+ashkan1998 wants to retweet from user 3
+ashkan1998 wants to retweet 2th tweet of user 3
+reTweeting process by ashkan1998 successfully done
+ashkan1998 backed to tweeting service menu
+welcoming message of Tweeting service sent to ashkan1998
+receive from ashkan1998 : 4
+ashkan1998 Quited from Tweeting service
+welcoming message of Timeline service sent to ashkan1998
+receive from ashkan1998 : 1
+process of observe Timeline by ashkan1998  started
+process of observe Timeline by ashkan1998 ended
+process of observe Timeline by ashkan1998  started
+ashkan1998 backed to Timeline service menu
+welcoming message of Timeline service sent to ashkan1998
+receive from ashkan1998 : 2
+ashkan1998 Quited from Timeline service
+welcoming message of Tweeting service sent to ashkan1998
+receive from ashkan1998 : 2
+process of remove a tweet by ashkan1998  started
+the tweet(Today is Sunday) removed by ashkan1998
+process of remove a tweet by ashkan1998  started
+ashkan1998 backed to tweeting service menu
+welcoming message of Tweeting service sent to ashkan1998
+receive from ashkan1998 : 4
+ashkan1998 Quited from Tweeting service
+welcoming message of Timeline service sent to ashkan1998
+receive from ashkan1998 : 1
+process of observe Timeline by ashkan1998  started
+process of observe Timeline by ashkan1998 ended
+process of observe Timeline by ashkan1998  started
+ali1998 backed to tweeting service menu
+welcoming message of Tweeting service sent to ali1998
+receive from ali1998 : 2
+process of remove a tweet by ali1998  started
+the tweet(Today is Sunday) removed by ali1998
+process of remove a tweet by ali1998  started
+process of observe Timeline by ashkan1998 ended
+process of observe Timeline by ashkan1998  started
+ali1998 backed to tweeting service menu
+welcoming message of Tweeting service sent to ali1998
+receive from ali1998 : 4
+ali1998 Quited from Tweeting service
+welcoming message of observer service sent to ali1998
+receive from ali1998 : 1
+process of follow a user by ali1998  started
+received 1
+ali1998 wants to follow user 3
+follow a user process by ali1998 successfully done
+process of follow a user by ali1998  started
+process of observe Timeline by ashkan1998 ended
+process of observe Timeline by ashkan1998  started
+received 2
+ali1998 backed to observer service menu
+welcoming message of observer service sent to ali1998
+receive from ali1998 : 2
+process of unfollow a user by ali1998  started
+ali1998 wants to unfollow 1th of its favorite users
+unfollow a user process by ali1998 successfully done
+process of unfollow a user by ali1998  started
+process of observe Timeline by ashkan1998 ended
+process of observe Timeline by ashkan1998  started
+ashkan1998 backed to Timeline service menu
+welcoming message of Timeline service sent to ashkan1998
+receive from ashkan1998 : 2
+ashkan1998 Quited from Timeline service
+welcoming message of observer service sent to ashkan1998
+receive from ashkan1998 : 3
+process of observe favorite users Tweets by ashkan1998  started
+process of observe favorite users Tweets by ashkan1998  ended
+process of observe favorite users Tweets by ashkan1998  started
+ashkan1998 backed to observer service menu
+welcoming message of observer service sent to ashkan1998
+receive from ashkan1998 : 4
+ashkan1998 Quited from observer service
+ashkan1998 Quited
+ali1998 backed to observer service menu
+welcoming message of observer service sent to ali1998
+receive from ali1998 : 4
+ali1998 Quited from observer service
+ali1998 Quited
+hossein1998 chose to back to add method of tweeting service
+hossein1998 backed to tweeting service menu
+welcoming message of Tweeting service sent to hossein1998
+receive from hossein1998 : 4
+hossein1998 Quited from Tweeting service
+hossein1998 Quited

@@ -32,6 +32,7 @@ public class ObserverService_impl implements ObserverService {
      * creates a new observer service
      * @param users users of ServerSide
      * @param index index of the user who wants to use observer service
+     * @param connectionSocket a socket for connecting  to user
      */
     public ObserverService_impl(ArrayList<User> users, int index,Socket connectionSocket) {
         this.users = users;
@@ -51,7 +52,9 @@ public class ObserverService_impl implements ObserverService {
                 String msg;
                 usefulmethods.send_message(out,"Welcome to observer service" + "\n" + "1:follow a user " + '\n' + "2:unfollow a user" + '\n' + "3:show Tweets of favorite users" + '\n' + "4:back");
                 System.out.println("welcoming message of observer service sent to " + users.get(index).getUsername());
+                file_utility.record_events("welcoming message of observer service sent to " + users.get(index).getUsername());
                 System.out.println("receive from " + users.get(index).getUsername() + " : " + (msg= usefulmethods.read_message(in)));
+                file_utility.record_events("receive from " + users.get(index).getUsername() + " : " + msg);
                 switch (msg) {
                     case "1":
                         follow();
@@ -64,6 +67,7 @@ public class ObserverService_impl implements ObserverService {
                         break;
                     default:
                         System.out.println(users.get(index).getUsername() + " Quited from observer service");
+                        file_utility.record_events(users.get(index).getUsername() + " Quited from observer service");
                         break label;
                 }
             }
@@ -79,8 +83,10 @@ public class ObserverService_impl implements ObserverService {
         while (true) {
             usefulmethods.send_message(out,"1:follow" + '\n' + "2:back");
             System.out.println("process of follow a user by " + users.get(index).getUsername()+"  started");
+            file_utility.record_events("process of follow a user by " + users.get(index).getUsername()+"  started");
             select = usefulmethods.read_message(in);
             System.out.println("received " + select);
+            file_utility.record_events("received " + select);
             if (select.equals("1")) {
                 int ix1;
                 while (true) {
@@ -88,18 +94,25 @@ public class ObserverService_impl implements ObserverService {
                             "pay attention That you can not follow yourself");
                     ix1 = Integer.parseInt(usefulmethods.read_message(in)) - 1;
                     System.out.println(users.get(index).getUsername() + " wants to follow user " + (ix1+1));
+                    file_utility.record_events(users.get(index).getUsername() + " wants to follow user " + (ix1+1));
                     if (ix1 < users.size() && ix1 != index) {
                         usefulmethods.send_message(out,"true");
-                        if (users.get(index).getFavoriteUsers().contains(users.get(ix1))){
+                        ArrayList<String>favorites= new ArrayList<>();
+                        for(User user : users.get(index).getFavoriteUsers())
+                            favorites.add(user.getUsername());
+                        if (favorites.contains(users.get(ix1).getUsername())){
                             usefulmethods.send_message(out, "you have already followed this user");
                             System.out.println(users.get(index).getUsername() + " have already followed this user");
+                            file_utility.record_events(users.get(index).getUsername() + " have already followed this user");
                         }
 
                         else {
                             users.get(ix1).getFollowers().add(users.get(index));
                             users.get(index).getFavoriteUsers().add(users.get(ix1));
+                            file_utility.make_changes(users);
                             usefulmethods.send_message(out,"follow this user successfully done");
                             System.out.println("follow a user process by " + users.get(index).getUsername()+" successfully done");
+                            file_utility.record_events("follow a user process by " + users.get(index).getUsername()+" successfully done");
                         }
                         Thread.sleep(1);
                         break;
@@ -108,21 +121,27 @@ public class ObserverService_impl implements ObserverService {
                         if (ix1 == index){
                             usefulmethods.send_message(out, ("you can not follow yourself." + '\n' + "1:continue attempting" + "\n" + "2: back "));
                             System.out.println(users.get(index).getUsername() + " wanted to follow itself.we requested from it to choose continue attempting or back");
+                           file_utility.record_events(users.get(index).getUsername() + " wanted to follow itself.we requested from it to choose continue attempting or back");
                         }
                         else{
                             usefulmethods.send_message(out, ("This user does not exist." + '\n' + "1:continue attempting" + "\n" + "2: back "));
                             System.out.println("the number that " + users.get(index).getUsername() + "  entered was bigger than number of users.we requested from it to choose continue attempting or back");
+                            file_utility.record_events("the number that " + users.get(index).getUsername() + "  entered was bigger than number of users.we requested from it to choose continue attempting or back");
                         }
                         if ( usefulmethods.read_message(in) .equals("2")) {
                             System.out.println(users.get(index).getUsername() + " chose to back to follow method of observer service");
+                            file_utility.record_events(users.get(index).getUsername() + " chose to back to follow method of observer service");
                             break;
                         }
-                        else
+                        else {
                             System.out.println(users.get(index).getUsername() + " chose to continue attempting");
+                            file_utility.record_events(users.get(index).getUsername() + " chose to continue attempting");
+                        }
                     }
                 }
             } else {
                 System.out.println(users.get(index).getUsername()+ " backed to observer service menu");
+                file_utility.record_events(users.get(index).getUsername()+ " backed to observer service menu");
                 break;
             }
         }
@@ -134,6 +153,7 @@ public class ObserverService_impl implements ObserverService {
             while (true) {
                 usefulmethods.send_message(out, "1:unfollow" + '\n' + "2:back");
                 System.out.println("process of unfollow a user by " + users.get(index).getUsername() + "  started");
+                file_utility.record_events("process of unfollow a user by " + users.get(index).getUsername() + "  started");
                 select = usefulmethods.read_message(in);
                 if (select.equals("1")) {
                     int ix1;
@@ -141,11 +161,18 @@ public class ObserverService_impl implements ObserverService {
                         usefulmethods.send_message(out, "which of your favorite users you want to unfollow?(favorite user number)");
                         ix1 = Integer.parseInt(usefulmethods.read_message(in)) - 1;
                         System.out.println(users.get(index).getUsername() + " wants to unfollow " + (ix1 + 1) + "th of its favorite users");
+                        file_utility.record_events(users.get(index).getUsername() + " wants to unfollow " + (ix1 + 1) + "th of its favorite users");
                         if (ix1 < users.get(index).getFavoriteUsers().size()) {
                             usefulmethods.send_message(out, "true");
-                            users.get(index).getFavoriteUsers().get(ix1).getFollowers().remove(users.get(index));
+                           for(int i = 0 ; i < users.get(index).getFavoriteUsers().get(ix1).getFollowers().size();i++)
+                               if(users.get(index).getFavoriteUsers().get(ix1).getFollowers().get(i).equals(users.get(index))){
+                                   users.get(index).getFavoriteUsers().get(ix1).getFollowers().remove(i);
+                                   break;
+                               }
                             users.get(index).getFavoriteUsers().remove(ix1);
+                            file_utility.make_changes(users);
                             System.out.println("unfollow a user process by " + users.get(index).getUsername() + " successfully done");
+                            file_utility.record_events("unfollow a user process by " + users.get(index).getUsername() + " successfully done");
                             usefulmethods.send_message(out, "unfollow this user successfully done");
                             Thread.sleep(1);
                             break;
@@ -153,15 +180,20 @@ public class ObserverService_impl implements ObserverService {
                             usefulmethods.send_message(out, "false");
                             usefulmethods.send_message(out, ("This user does not exist." + '\n' + "1:continue attempting" + "\n" + "2: back "));
                             System.out.println("the number that " + users.get(index).getUsername() + "  entered was bigger than number of its favorite users.we requested from it to choose continue attempting or back");
+                            file_utility.record_events("the number that " + users.get(index).getUsername() + "  entered was bigger than number of its favorite users.we requested from it to choose continue attempting or back");
                             if (usefulmethods.read_message(in).equals("2")) {
                                 System.out.println(users.get(index).getUsername() + " chose to back to unfollow method of observer service");
+                                file_utility.record_events(users.get(index).getUsername() + " chose to back to unfollow method of observer service");
                                 break;
-                            } else
+                            } else {
                                 System.out.println(users.get(index).getUsername() + " chose to continue attempting");
+                                file_utility.record_events(users.get(index).getUsername() + " chose to continue attempting");
+                            }
                         }
                     }
                 } else {
                     System.out.println(users.get(index).getUsername() + " backed to observer service menu");
+                    file_utility.record_events(users.get(index).getUsername() + " backed to observer service menu");
                     break;
                 }
             }
@@ -173,6 +205,7 @@ public class ObserverService_impl implements ObserverService {
         while (true) {
             usefulmethods.send_message(out, "1:observe" + '\n' + "2:back");
             System.out.println("process of observe favorite users Tweets by " + users.get(index).getUsername() + "  started");
+            file_utility.record_events("process of observe favorite users Tweets by " + users.get(index).getUsername() + "  started");
             select = usefulmethods.read_message(in);
             if (select.equals("1")) {
             int count = 0 ;
@@ -192,9 +225,11 @@ public class ObserverService_impl implements ObserverService {
                         Thread.sleep(1);
                     }
                 System.out.println("process of observe favorite users Tweets by " + users.get(index).getUsername() + "  ended");
+                    file_utility.record_events("process of observe favorite users Tweets by " + users.get(index).getUsername() + "  ended");
             }
             else {
                 System.out.println(users.get(index).getUsername() + " backed to observer service menu");
+                file_utility.record_events(users.get(index).getUsername() + " backed to observer service menu");
                 break;
             }
         }

@@ -32,6 +32,9 @@ import java.util.ArrayList;
 
     /**
      * creates a new  authentication service
+     * @param users  users of ServerSide
+     * @param clientNum number of client
+     * @param connectionSocket  a socket for connecting  to user
      */
     public AuthenticationService_impl(ArrayList<User> users ,int clientNum ,Socket connectionSocket) {
         this.users = users;
@@ -281,7 +284,6 @@ import java.util.ArrayList;
 
     /**
      * this method checks that the username which person inserted is duplicate or not
-     *
      * @param username username which is checked that is duplicate or not
      * @return true if it not be duplicate otherwise false
      */
