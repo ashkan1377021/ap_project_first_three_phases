@@ -64,7 +64,7 @@ public class ClientTimelineService_impl implements ClientTimelineService {
     }
 
     /**
-     * this method shows Tweets,reTweets & likes of each favorite user
+     * this method shows Tweets,reTweets and likes of each favorite user
      */
     public void showTweets() {
         while (true) {
